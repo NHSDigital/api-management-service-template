@@ -28,14 +28,16 @@ lint:
 validate: generate-examples
 	java -jar bin/org.hl7.fhir.validator.jar build/examples/**/*application_fhir+json*.json -version 4.0.1 -tx n/a | tee /tmp/validation.txt
 
-publish:
+clean:
+	rm -rf build
+	rm -rf dist
+
+publish: clean
+	mkdir -p build
 	npm run publish 2> /dev/null
 
 serve: update-examples
 	npm run serve
-
-clean:
-	rm -rf build/examples
 
 generate-examples: publish clean
 	mkdir -p build/examples
@@ -61,3 +63,10 @@ format:
 
 sandbox: update-examples
 	cd sandbox && npm run start
+
+build-proxy:
+	scripts/build_proxy.sh
+
+release: clean publish build-proxy
+	mkdir -p dist
+	cp -r build/. dist

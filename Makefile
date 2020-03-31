@@ -26,7 +26,7 @@ lint:
 	find -name '*.sh' | grep -v node_modules | xargs shellcheck
 
 validate: generate-examples
-	java -jar bin/org.hl7.fhir.validator.jar dist/examples/**/*application_fhir+json*.json -version 4.0.1 -tx n/a | tee /tmp/validation.txt
+	java -jar bin/org.hl7.fhir.validator.jar build/examples/**/*application_fhir+json*.json -version 4.0.1 -tx n/a | tee /tmp/validation.txt
 
 publish:
 	npm run publish 2> /dev/null
@@ -35,15 +35,15 @@ serve: update-examples
 	npm run serve
 
 clean:
-	rm -rf dist/examples
+	rm -rf build/examples
 
 generate-examples: publish clean
-	mkdir -p dist/examples
-	poetry run python scripts/generate_examples.py dist/template-api.json dist/examples
+	mkdir -p build/examples
+	poetry run python scripts/generate_examples.py build/template-api.json build/examples
 
 update-examples: generate-examples
 	#TODO copy and standardise examples e.g.:
-	jq -rM . <dist/examples/resources/Patient.json >specification/components/examples/Patient.json
+	jq -rM . <build/examples/resources/Patient.json >specification/components/examples/Patient.json
 	make publish
 
 check-licenses:

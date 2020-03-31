@@ -47,7 +47,7 @@ Various scripts and commands rely on environment variables being set. These are 
 ### Make commands
 There are `make` commands that alias some of this functionality:
  * `lint` -- Lints the spec and code
- * `publish` -- Outputs the specification as a **single file** into the `dist/` directory
+ * `publish` -- Outputs the specification as a **single file** into the `build/` directory
  * `serve` -- Serves a preview of the specification in human-readable format
  * `generate-examples` -- generate example objects from the specification
  * `validate` -- validate generated examples against FHIR R4
@@ -90,7 +90,7 @@ There is a template environment file available at `tests/e2e/environments/postma
 Speccy does the lifting for the following npm scripts:
 
  * `test` -- Lints the definition
- * `publish` -- Outputs the specification as a **single file** into the `dist/` directory
+ * `publish` -- Outputs the specification as a **single file** into the `build/` directory
  * `serve` -- Serves a preview of the specification in human-readable format
 
 (Workflow detailed in a [post](https://developerjack.com/blog/2018/maintaining-large-design-first-api-specs/) on the *developerjack* blog.)

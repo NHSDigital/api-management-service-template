@@ -44,19 +44,12 @@ generate-examples: publish clean
 	poetry run python scripts/generate_examples.py build/template-api.json build/examples
 
 update-examples: generate-examples
-	#TODO copy and standardise examples e.g.:
 	jq -rM . <build/examples/resources/ExampleData.json >specification/components/examples/ExampleData.json
 	make publish
 
 check-licenses:
 	npm run check-licenses
 	scripts/check_python_licenses.sh
-
-deploy-proxy: update-examples
-	scripts/deploy_proxy.sh
-
-deploy-spec: update-examples
-	scripts/deploy_spec.sh
 
 format:
 	poetry run black **/*.py

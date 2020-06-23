@@ -18,6 +18,4 @@ npm run serve
 Redeploy the API Proxy. See the main [README.md](../README.md).
 
 ## Endpoints
-
-TODO add endpoints, e.g.:
-- [x] GET    `/Patient`
+- [x] GET    `/example`

@@ -102,7 +102,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'components/schemas/ExampleResponse.yaml'
+                $ref: '#/components/schemas/ExampleResponse'
               example:
                 $ref: 'components/examples/ExampleData.json'
         '400':
@@ -110,4 +110,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'components/schemas/ErrorResponse.yaml'
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    ExampleResponse:
+      $ref: 'components/schemas/ExampleResponse.yaml'
+    ErrorResponse:
+      $ref: 'components/schemas/ErrorResponse.yaml'

@@ -87,7 +87,7 @@ paths:
       summary: Example endpoint
       operationId: example
       description: The example endpoint to retrieve an example response.
-      paramaters:
+      parameters:
         - name: is_successful
           description: Toggle for successful response
           example: true
@@ -98,29 +98,16 @@ paths:
             default: true
       responses:
         '200':
-          description: A successful token exchange request
+          description: A successful example data retrieval request.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: string
-                    description: Example data returned from the API
-                    example: Example data
-                  timestamp:
-                    type: string
-                    description: Time the search was performed.
-                    format: datetime
-                    example: '2019-12-25T12:00:00+00:00'
+                $ref: 'components/schemas/ExampleResponse.yaml'
+              example:
+                $ref: 'components/examples/ExampleData.json'
         '400':
-          description: Invalid search paramaters supplied.
+          description: Invalid parameters supplied.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  code:
-                    type: string
-                    description: Example error code from template api
-                    example: '400'
+                $ref: 'components/schemas/ErrorResponse.yaml'

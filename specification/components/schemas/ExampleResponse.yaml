@@ -1,0 +1,11 @@
+type: object
+properties:
+  data:
+    type: string
+    description: Example data returned from the API
+    example: Example data
+  timestamp:
+    type: string
+    description: Time the search was performed.
+    format: datetime
+    example: '2019-12-25T12:00:00+00:00'

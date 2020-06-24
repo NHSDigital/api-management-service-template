@@ -1,17 +1,18 @@
 const Boom = require('boom')
+const exampleService = require('../../services/example-service')
 const datefns = require('date-fns')
 
 module.exports = [
 
   {
     method: 'GET',
-    path: '/example',
+    path: '/Example',
     handler: (request) => {
       var is_successful = request.query["is_successful"];
       if (is_successful) {
         return {
-          "data": "example data",
-          "timestamp": datefns.format(Date.now(), "yyyy-MM-dd'T'HH:mm:ss+00:00")
+          "timestamp": datefns.format(Date.now(), "yyyy-MM-dd'T'HH:mm:ss+00:00"),
+          "data": exampleService.exampleData
         }
       }
       else {

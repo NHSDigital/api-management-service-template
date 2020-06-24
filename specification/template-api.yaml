@@ -39,7 +39,7 @@ info:
 
     You don’t need to know much about FHIR to use this API - FHIR APIs are just RESTful APIs that follow specific rules.
     In particular:
-    - resource names are capitalised and singular, for example the `/Patient` not `/patients`
+    - resource names are capitalised and singular, for example the `/Example` not `/examples`
     - array names are singular, for example `line` not `lines` for address lines
     - data items that are country-specific and thus not included in the FHIR global base resources are usually wrapped in an `extension` object
 
@@ -75,12 +75,12 @@ info:
     url: 'https://tbc.api.nhs.net'
     email: tbc-api-support@nhs.net
 servers:
-  - url: 'https://emea-demo8-test.apigee.net/TODO sandbox endpoint'
+  - url: 'https://emea-demo8-test.apigee.net/Example sandbox endpoint'
     description: Sandbox service.
 tags:
   - name: example-route
 paths:
-  /example:
+  /Example:
     get:
       tags:
         - example-route
@@ -104,7 +104,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExampleResponse'
               example:
-                $ref: 'components/examples/ExampleData.json'
+                timestamp: '2019-12-25T12:00:00+00:00'
+                data:
+                  $ref: 'components/examples/ExampleData.json'
         '400':
           description: Invalid parameters supplied.
           content:

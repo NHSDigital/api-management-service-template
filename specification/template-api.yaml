@@ -117,6 +117,35 @@ paths:
 components:
   schemas:
     ExampleResponse:
-      $ref: 'components/schemas/ExampleResponse.yaml'
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: Time the search was performed.
+          format: datetime
+          example: '2019-12-25T12:00:00+00:00'
+        data:
+          type: array
+          description: Example data returned from the API
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: 'example name'
     ErrorResponse:
-      $ref: 'components/schemas/ErrorResponse.yaml'
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          description: Error code returned from server
+          example: '400'
+        error:
+          type: string
+          description: Error returned from server
+          example: 'Bad Request'
+        message:
+          type: string
+          description: Error message returned from the server
+          example: 'Invalid params supplied'
+

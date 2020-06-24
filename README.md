@@ -1,6 +1,6 @@
-# template-api
-
-![Build](https://github.com/NHSDigital/template-api/workflows/Build/badge.svg?branch=master)
+# {% meta.name %}
+<!-- 
+![Build](https://github.com/NHSDigital/template-api/workflows/Build/badge.svg?branch=master) -->
 
 This is a RESTful HL7® FHIR® API specification for the *Template API*.
 

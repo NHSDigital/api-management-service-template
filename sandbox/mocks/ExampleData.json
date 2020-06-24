@@ -1,1 +1,3 @@
-../../specification/components/examples/ExampleData.json
+{
+  "name": "Example name"
+}

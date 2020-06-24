@@ -1,5 +1,5 @@
 const fs = require('fs')
 
 module.exports = {
-  exampleData: JSON.parse(fs.readFileSync('mocks/ExampleData.json'))
+  exampleData: JSON.parse(fs.readFileSync(__dirname + '/../mocks/ExampleData.json'))
 }

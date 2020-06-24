@@ -1,4 +1,4 @@
-<TargetEndpoint name="ig3">
+<TargetEndpoint name="{{ config.meta.canonical_name }}-target">
   <FaultRules>
     <FaultRule name="access_token_expired">
       <Step>
@@ -45,7 +45,7 @@
       <Enabled>true</Enabled>
     </SSLInfo>
     <LoadBalancer>
-      <Server name="ig3" />
+      <Server name="{{ config.meta.canonical_name }}-target" />
     </LoadBalancer>
   </HTTPTargetConnection>
 </TargetEndpoint>

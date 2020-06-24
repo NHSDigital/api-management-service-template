@@ -1,16 +1,16 @@
 {
-  "name": "{{ config.meta.canonical-name }}",
+  "name": "{{ config.meta.canonical_name }}",
   "version": "0.0.1",
   "description": "OAS (Swagger v3) API Definition for Template API",
   "scripts": {
-    "lint": "node_modules/.bin/speccy lint specification/{{ config.meta.canonical-name }}.yaml --skip default-and-example-are-redundant",
-    "publish": "mkdir -p build && node_modules/.bin/speccy resolve specification/{{ config.meta.canonical-name }}.yaml -i | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > build/{{ config.meta.canonical-name }}.json",
-    "serve": "node_modules/.bin/speccy serve build/{{ config.meta.canonical-name }}.json",
+    "lint": "node_modules/.bin/speccy lint specification/{{ config.meta.canonical_name }}.yaml --skip default-and-example-are-redundant",
+    "publish": "mkdir -p build && node_modules/.bin/speccy resolve specification/{{ config.meta.canonical_name }}.yaml -i | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > build/{{ config.meta.canonical_name }}.json",
+    "serve": "node_modules/.bin/speccy serve build/{{ config.meta.canonical_name }}.json",
     "check-licenses": "node_modules/.bin/license-checker --failOn GPL --failOn LGPL"
   },
   "author": "NHS Digital",
   "license": "MIT",
-  "homepage": "https://github.com/NHSDigital/{{ config.meta.canonical-name }}-api",
+  "homepage": "https://github.com/NHSDigital/{{ config.meta.canonical_name }}-api",
   "dependencies": {
     "speccy": "^0.11.0"
   },

@@ -13,9 +13,9 @@ terraform {
 }
 
 
-module "{{ config.meta.canonical-name }}" {
+module "{{ config.meta.canonical_name }}" {
   source                   = "github.com/NHSDigital/api-platform-service-module"
-  name                     = "{{ config.meta.canonical-name }}"
+  name                     = "{{ config.meta.canonical_name }}"
   path                     = "{{ config.base_path }}"
   apigee_environment       = var.apigee_environment
   proxy_type               = (var.force_sandbox || length(regexall("sandbox", var.apigee_environment)) > 0) ? "sandbox" : "live"

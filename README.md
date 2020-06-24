@@ -1,4 +1,4 @@
-# {% meta.name %}
+# {% config.meta.name %}
 <!-- 
 ![Build](https://github.com/NHSDigital/template-api/workflows/Build/badge.svg?branch=master) -->
 

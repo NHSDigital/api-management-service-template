@@ -1,4 +1,4 @@
 # Changelog
 
-## 2020-06-23
-* Bring template api upto date
+## {{ ansible_date_time.date }}
+* Initial commit

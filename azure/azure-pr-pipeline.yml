@@ -9,8 +9,8 @@ pr:
 
 resources:
   pipelines:
-  - pipeline: {{ config.meta.short_name }}
-    source: "{{ config.meta.pipeline_name_prefix }}-Build"
+    - pipeline: {{ config.meta.short_name }}
+      source: "{{ config.meta.pipeline_name_prefix }}-Build"
   repositories:
     - repository: templates
       type: github
@@ -29,11 +29,8 @@ parameters:
     default: latest
 
 variables:
-  SERVICE_NAME: {{ config.meta.canonical_name }}
-  SERVICE_BASE_PATH: {{ config.base_path }}
-  VARIABLES_KVM: "{{ config.meta.short_name }}-variables"
-  ENCRYPTED_VARIABLES_KVM: "{{ config.meta.short_name }}-variables-encrypted"
-  IDENTITY_TARGET_SERVER: identity-server
+  SERVICE_NAME: generated-template
+  SERVICE_BASE_PATH: /generated-template
   FORCE_SANDBOX: false
   NAMESPACE: from_branchname
 
@@ -57,8 +54,8 @@ stages:
                 - template: az/templates/download-build-artifact.yml@templates
                   parameters:
                     serviceName: $(SERVICE_NAME)
-                    artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
-                    artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
+                    artifactBuildId: ${{ parameters.artifactBuildId }}
+                    artifactBranch: ${{ parameters.artifactBranch }}
                     pipelineAlias: {{ config.meta.short_name }}
-                - template: az/templates/templates/identity-service-templating.yml@templates
-                - template: az/templates/templates/deploy-namespaced-service.yml@templates
+                - template: az/templates/identity-service-templating.yml@templates
+                - template: az/templates/deploy-namespaced-service.yml@templates

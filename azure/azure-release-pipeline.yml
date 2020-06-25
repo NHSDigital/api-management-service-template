@@ -5,12 +5,13 @@ trigger: none
 pr: none
 
 variables:
-  SERVICE_NAME: identity-service
-  SERVICE_BASE_PATH: /oauth2
-  VARIABLES_KVM: identity-service-variables
-  ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
+  SERVICE_NAME: {{ config.meta.canonical_name }}
+  SERVICE_BASE_PATH: {{ config.base_path }}
+  VARIABLES_KVM: "{{ config.meta.short_name }}-variables"
+  ENCRYPTED_VARIABLES_KVM: "{{ config.meta.short_name }}-variables-encrypted"
   IDENTITY_TARGET_SERVER: identity-server
-  SPEC_FILE_NAME: identity-service
+  FORCE_SANDBOX: false
+  NAMESPACE: from_branchname
 
 parameters:
   - name : artifactBranch
@@ -24,12 +25,17 @@ parameters:
 
 resources:
   pipelines:
-  - pipeline: IdentityService
-    source: "Identity-Service-Build"
-    trigger:
-      branches:
-        include:
-          - refs/tags/v*
+    - pipeline: {{ config.meta.short_name }}
+      source: "{{ config.meta.pipeline_name_prefix }}-Build"
+      trigger:
+        branches:
+          include:
+            - refs/tags/v*
+  repositories:
+    - repository: templates
+      type: github
+      name: NHSDigital/api-management-utils
+      ref: 'refs/heads/APM-1120-Template-Pipelines'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -48,14 +54,14 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: templates/download-build-artifact.yml
+              - template: az/templates/download-build-artifact.yml@templates
                 parameters:
                   serviceName: $(SERVICE_NAME)
-                  artifactBuildId: ${{ parameters.artifactBuildId }}
-                  artifactBranch: ${{ parameters.artifactBranch }}
-                  pipelineAlias: IdentityService
-              - template: templates/identity-service-templating.yml
-              - template: templates/deploy-service.yml
+                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
+                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
+                  pipelineAlias: {{ config.meta.short_name }}
+              - template: az/templates/templates/identity-service-templating.yml@templates
+              - template: az/templates/templates/deploy-namespaced-service.yml@templates
 
 - stage: DeployInternalQA
   displayName: internal-qa
@@ -71,14 +77,14 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: templates/download-build-artifact.yml
+              - template: az/templates/download-build-artifact.yml@templates
                 parameters:
                   serviceName: $(SERVICE_NAME)
-                  artifactBuildId: ${{ parameters.artifactBuildId }}
-                  artifactBranch: ${{ parameters.artifactBranch }}
-                  pipelineAlias: IdentityService
-              - template: templates/identity-service-templating.yml
-              - template: templates/deploy-service.yml
+                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
+                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
+                  pipelineAlias: {{ config.meta.short_name }}
+              - template: az/templates/templates/identity-service-templating.yml@templates
+              - template: az/templates/templates/deploy-namespaced-service.yml@templates
 
 - stage: DeployInternalQASandbox
   displayName: internal-qa-sandbox
@@ -94,14 +100,14 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: templates/download-build-artifact.yml
+              - template: az/templates/download-build-artifact.yml@templates
                 parameters:
                   serviceName: $(SERVICE_NAME)
-                  artifactBuildId: ${{ parameters.artifactBuildId }}
-                  artifactBranch: ${{ parameters.artifactBranch }}
-                  pipelineAlias: IdentityService
-              - template: templates/identity-service-templating.yml
-              - template: templates/deploy-service.yml
+                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
+                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
+                  pipelineAlias: {{ config.meta.short_name }}
+              - template: az/templates/templates/identity-service-templating.yml@templates
+              - template: az/templates/templates/deploy-namespaced-service.yml@templates
 
 - stage: DeployInternalPortal
   displayName: internal-portal
@@ -117,13 +123,13 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: templates/download-build-artifact.yml
+              - template: az/templates/download-build-artifact.yml@templates
                 parameters:
                   serviceName: $(SERVICE_NAME)
-                  artifactBuildId: ${{ parameters.artifactBuildId }}
-                  artifactBranch: ${{ parameters.artifactBranch }}
-                  pipelineAlias: IdentityService
-              - template: templates/deploy-specs.yml
+                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
+                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
+                  pipelineAlias: {{ config.meta.short_name }}
+              - template: az/templates/deploy-specs.yml@templates
 
 - stage: DeployRef
   displayName: ref
@@ -141,14 +147,14 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: templates/download-build-artifact.yml
+              - template: az/templates/download-build-artifact.yml@templates
                 parameters:
                   serviceName: $(SERVICE_NAME)
-                  artifactBuildId: ${{ parameters.artifactBuildId }}
-                  artifactBranch: ${{ parameters.artifactBranch }}
-                  pipelineAlias: IdentityService
-              - template: templates/identity-service-templating.yml
-              - template: templates/deploy-service.yml
+                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
+                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
+                  pipelineAlias: {{ config.meta.short_name }}
+              - template: az/templates/templates/identity-service-templating.yml@templates
+              - template: az/templates/templates/deploy-namespaced-service.yml@templates
 
 - stage: DeployDev
   displayName: dev
@@ -165,14 +171,14 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: templates/download-build-artifact.yml
+              - template: az/templates/download-build-artifact.yml@templates
                 parameters:
                   serviceName: $(SERVICE_NAME)
-                  artifactBuildId: ${{ parameters.artifactBuildId }}
-                  artifactBranch: ${{ parameters.artifactBranch }}
-                  pipelineAlias: IdentityService
-              - template: templates/identity-service-templating.yml
-              - template: templates/deploy-service.yml
+                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
+                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
+                  pipelineAlias: {{ config.meta.short_name }}
+              - template: az/templates/templates/identity-service-templating.yml@templates
+              - template: az/templates/templates/deploy-namespaced-service.yml@templates
 
 - stage: DeployProd
   displayName: prod
@@ -189,14 +195,14 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: templates/download-build-artifact.yml
+              - template: az/templates/download-build-artifact.yml@templates
                 parameters:
                   serviceName: $(SERVICE_NAME)
-                  artifactBuildId: ${{ parameters.artifactBuildId }}
-                  artifactBranch: ${{ parameters.artifactBranch }}
-                  pipelineAlias: IdentityService
-              - template: templates/identity-service-templating.yml
-              - template: templates/deploy-service.yml
+                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
+                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
+                  pipelineAlias: {{ config.meta.short_name }}
+              - template: az/templates/templates/identity-service-templating.yml@templates
+              - template: az/templates/templates/deploy-namespaced-service.yml@templates
 
 - stage: DeploySandbox
   displayName: sandbox
@@ -213,14 +219,14 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: templates/download-build-artifact.yml
+              - template: az/templates/download-build-artifact.yml@templates
                 parameters:
                   serviceName: $(SERVICE_NAME)
-                  artifactBuildId: ${{ parameters.artifactBuildId }}
-                  artifactBranch: ${{ parameters.artifactBranch }}
-                  pipelineAlias: IdentityService
-              - template: templates/identity-service-templating.yml
-              - template: templates/deploy-service.yml
+                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
+                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
+                  pipelineAlias: {{ config.meta.short_name }}
+              - template: az/templates/templates/identity-service-templating.yml@templates
+              - template: az/templates/templates/deploy-namespaced-service.yml@templates
 
 - stage: DeployInt
   displayName: int
@@ -237,42 +243,20 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: templates/download-build-artifact.yml
+              - template: az/templates/download-build-artifact.yml@templates
                 parameters:
                   serviceName: $(SERVICE_NAME)
-                  artifactBuildId: ${{ parameters.artifactBuildId }}
-                  artifactBranch: ${{ parameters.artifactBranch }}
-                  pipelineAlias: IdentityService
-              - template: templates/identity-service-templating.yml
-              - template: templates/deploy-service.yml
-
-- stage: DeployIntNoSmartCard
-  displayName: int no-smartcard
-  dependsOn: 
-    - DeployRef
-  variables:
-    - group: apigee-prod
-    - group: env-int
-  jobs:
-    - deployment: DeployService
-      displayName: Deploy Service
-      environment: 'int-no-smartcard'
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-              - template: templates/download-build-artifact.yml
-                parameters:
-                  serviceName: $(SERVICE_NAME)
-                  artifactBuildId: ${{ parameters.artifactBuildId }}
-                  artifactBranch: ${{ parameters.artifactBranch }}
-                  pipelineAlias: IdentityService
-              - template: templates/identity-service-templating.yml
-              - template: templates/deploy-service.yml
+                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
+                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
+                  pipelineAlias: {{ config.meta.short_name }}
+              - template: az/templates/templates/identity-service-templating.yml@templates
+              - template: az/templates/templates/deploy-namespaced-service.yml@templates
 
 - stage: DeployPortal
   displayName: portal
-  dependsOn: []
+  dependsOn:
+    - DeployProd
+    - DeploySandbox
   variables:
     - group: apigee-prod
     - group: env-portal
@@ -285,10 +269,10 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: templates/download-build-artifact.yml
+              - template: az/templates/download-build-artifact.yml@templates
                 parameters:
                   serviceName: $(SERVICE_NAME)
-                  artifactBuildId: ${{ parameters.artifactBuildId }}
-                  artifactBranch: ${{ parameters.artifactBranch }}
-                  pipelineAlias: IdentityService
-              - template: templates/deploy-specs.yml
+                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
+                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
+                  pipelineAlias: {{ config.meta.short_name }}
+              - template: az/templates/deploy-specs.yml@templates

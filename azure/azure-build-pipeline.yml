@@ -14,13 +14,10 @@ pr:
 
 jobs:
   - job: build
-    displayName: Build & Test
+    displayName: Build
     timeoutInMinutes: 10
     pool:
       vmImage: 'ubuntu-latest'
-    variables:
-      API_TEST_ENV_FILE_PATH: "tests/e2e/environments/local.postman_environment.json"
-      PIP_CACHE_DIR: ".poetry"
     steps:
       - checkout: self
 
@@ -85,4 +82,4 @@ jobs:
         displayName: Build Release Package
 
       - publish: dist/
-        artifact: identity-service-$(Build.BuildNumber)
+        artifact: '{{ config.meta.canonical_name }}-$(Build.BuildNumber)'

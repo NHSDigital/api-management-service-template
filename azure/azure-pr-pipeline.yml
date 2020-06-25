@@ -51,10 +51,8 @@ stages:
                 - template: templates/download-build-artifact.yml
                   parameters:
                     serviceName: $(SERVICE_NAME)
-                    {% raw %}
-                    artifactBuildId: ${{ parameters.artifactBuildId }}
-                    artifactBranch: ${{ parameters.artifactBranch }}
-                    {% endraw %}
+                    artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
+                    artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                     pipelineAlias: {{ config.meta.short_name }}
                 - template: templates/identity-service-templating.yml
                 - template: templates/deploy-namespaced-service.yml

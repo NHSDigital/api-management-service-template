@@ -10,7 +10,12 @@ pr:
 resources:
   pipelines:
   - pipeline: {{ config.meta.short_name }}
-    source: "Identity-Service-Build"
+    source: "{{ config.meta.pipeline_name_prefix }}-Build"
+  repositories:
+    - repository: templates
+      type: github
+      name: NHSDigital/api-management-utils
+      ref: 'refs/heads/APM-1120-Template-Pipelines'
 
 parameters:
   - name : artifactBranch
@@ -48,11 +53,11 @@ stages:
           runOnce:
             deploy:
               steps:
-                - template: templates/download-build-artifact.yml
+                - template: az/templates/download-build-artifact.yml@templates
                   parameters:
                     serviceName: $(SERVICE_NAME)
                     artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                     artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                     pipelineAlias: {{ config.meta.short_name }}
-                - template: templates/identity-service-templating.yml
-                - template: templates/deploy-namespaced-service.yml
+                - template: az/templates/templates/identity-service-templating.yml@templates
+                - template: az/templates/templates/deploy-namespaced-service.yml@templates

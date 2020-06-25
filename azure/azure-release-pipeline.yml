@@ -36,6 +36,7 @@ resources:
       type: github
       name: NHSDigital/api-management-utils
       ref: 'refs/heads/APM-1120-Template-Pipelines'
+      endpoint: api-management-infrastructure
 
 pool:
   vmImage: 'ubuntu-latest'

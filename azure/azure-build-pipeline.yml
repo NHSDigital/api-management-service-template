@@ -14,10 +14,13 @@ pr:
 
 jobs:
   - job: build
-    displayName: Build
+    displayName: Build & Test
     timeoutInMinutes: 10
     pool:
       vmImage: 'ubuntu-latest'
+    variables:
+      API_TEST_ENV_FILE_PATH: "tests/e2e/environments/local.postman_environment.json"
+      PIP_CACHE_DIR: ".poetry"
     steps:
       - checkout: self
 
@@ -55,7 +58,7 @@ jobs:
           path: ".poetry"
           restoreKeys: |
             "$(Agent.OS)" | "python" | poetry.lock
-            "$(Agent.OS)" | "pythons"
+            "$(Agent.OS)" | "python"
 
       - task: Cache@2
         displayName: "Cache Package NPM Dependencies"
@@ -65,15 +68,6 @@ jobs:
           restoreKeys: |
             "$(Agent.OS)" | "node" | package-lock.json
             "$(Agent.OS)" | "node"
-          
-      - task: Cache@2
-        displayName: "Cache Sandbox NPM Dependencies"
-        inputs:
-          key: '"$(Agent.OS)" | "node-sandbox" | sandbox/package-lock.json'
-          path: "sandbox/node_modules"
-          restoreKeys: |
-            "$(Agent.OS)" | "node-sandbox" | sandbox/package-lock.json
-            "$(Agent.OS)" | "node-sandbox"
 
       - bash: "make install"
         displayName: Install repo

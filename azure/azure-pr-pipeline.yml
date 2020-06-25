@@ -9,7 +9,7 @@ pr:
 
 resources:
   pipelines:
-  - pipeline: {{ config.meta.canonical_name }}
+  - pipeline: {{ config.meta.short_name }}
     source: "Identity-Service-Build"
 
 parameters:
@@ -51,8 +51,10 @@ stages:
                 - template: templates/download-build-artifact.yml
                   parameters:
                     serviceName: $(SERVICE_NAME)
-                    artifactBuildId: {% raw %}${{ parameters.artifactBuildId }}{% endraw %}
-                    artifactBranch: {% raw %}${{ parameters.artifactBranch }}{% endraw %}
-                    pipelineAlias: {{ config.meta.canonical_name }}
+                    {% raw %}
+                    artifactBuildId: ${{ parameters.artifactBuildId }}
+                    artifactBranch: ${{ parameters.artifactBranch }}
+                    {% endraw %}
+                    pipelineAlias: {{ config.meta.short_name }}
                 - template: templates/identity-service-templating.yml
                 - template: templates/deploy-namespaced-service.yml

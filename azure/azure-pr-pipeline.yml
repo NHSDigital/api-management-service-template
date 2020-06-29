@@ -57,5 +57,4 @@ stages:
                     artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                     artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                     pipelineAlias: {{ config.meta.short_name }}
-                - template: az/templates/identity-service-templating.yml@templates
                 - template: az/templates/deploy-namespaced-service.yml@templates

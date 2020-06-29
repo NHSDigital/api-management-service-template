@@ -30,7 +30,7 @@ parameters:
 
 variables:
   SERVICE_NAME: {{ config.meta.canonical_name }}
-  SERVICE_BASE_PATH: /{{ config.base_path }}
+  SERVICE_BASE_PATH: {{ config.base_path }}
   FORCE_SANDBOX: false
   NAMESPACE: from_branchname
 

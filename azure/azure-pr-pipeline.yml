@@ -29,8 +29,8 @@ parameters:
     default: latest
 
 variables:
-  SERVICE_NAME: generated-template
-  SERVICE_BASE_PATH: /generated-template
+  SERVICE_NAME: {{ config.meta.canonical_name }}
+  SERVICE_BASE_PATH: /{{ config.base_path }}
   FORCE_SANDBOX: false
   NAMESPACE: from_branchname
 

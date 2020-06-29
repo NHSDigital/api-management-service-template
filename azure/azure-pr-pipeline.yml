@@ -2,10 +2,7 @@ name: "$(SourceBranchName)+$(BuildID)"
 
 trigger: none
 
-pr:
-  branches:
-    include:
-      - master
+pr: none
 
 resources:
   pipelines:

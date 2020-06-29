@@ -56,8 +56,7 @@ stages:
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.short_name }}
-              - template: az/templates/identity-service-templating.yml@templates
-              - template: az/templates/deploy-namespaced-service.yml@templates
+              - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployInternalQA
   displayName: internal-qa
@@ -79,8 +78,7 @@ stages:
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.short_name }}
-              - template: az/templates/identity-service-templating.yml@templates
-              - template: az/templates/deploy-namespaced-service.yml@templates
+              - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployInternalQASandbox
   displayName: internal-qa-sandbox
@@ -102,8 +100,7 @@ stages:
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.short_name }}
-              - template: az/templates/identity-service-templating.yml@templates
-              - template: az/templates/deploy-namespaced-service.yml@templates
+              - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployInternalPortal
   displayName: internal-portal
@@ -149,8 +146,7 @@ stages:
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.short_name }}
-              - template: az/templates/identity-service-templating.yml@templates
-              - template: az/templates/deploy-namespaced-service.yml@templates
+              - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployDev
   displayName: dev
@@ -173,8 +169,7 @@ stages:
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.short_name }}
-              - template: az/templates/identity-service-templating.yml@templates
-              - template: az/templates/deploy-namespaced-service.yml@templates
+              - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployProd
   displayName: prod
@@ -197,8 +192,7 @@ stages:
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.short_name }}
-              - template: az/templates/identity-service-templating.yml@templates
-              - template: az/templates/deploy-namespaced-service.yml@templates
+              - template: az/templates/deploy-service.yml@templates
 
 - stage: DeploySandbox
   displayName: sandbox
@@ -221,8 +215,7 @@ stages:
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.short_name }}
-              - template: az/templates/identity-service-templating.yml@templates
-              - template: az/templates/deploy-namespaced-service.yml@templates
+              - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployInt
   displayName: int
@@ -245,7 +238,7 @@ stages:
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.short_name }}
-              - template: az/templates/deploy-namespaced-service.yml@templates
+              - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployPortal
   displayName: portal

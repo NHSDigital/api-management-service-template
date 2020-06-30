@@ -1,19 +1,25 @@
 name: "$(SourceBranchName)+$(BuildID)"
 
+# Prevents building every commit or on PR
 trigger: none
-
 pr: none
 
+# Consume an artifact from the build pipeline as soon as it becomes available.
 resources:
   pipelines:
-    - pipeline: {{ config.meta.short_name }}
+    - pipeline: "{{ config.meta.canonical_name }}"
       source: "{{ config.meta.pipeline_name_prefix }}-Build"
+      trigger:
+        branches:
+          exclude:
+            - 'refs/tags/v*'
+            - 'master'
   repositories:
     - repository: templates
       type: github
       name: NHSDigital/api-management-utils
       ref: 'refs/heads/APM-1120-Template-Pipelines'
-      endpoint: API Platform
+      endpoint: NHSDigital
 
 parameters:
   - name : artifactBranch
@@ -53,5 +59,5 @@ stages:
                     serviceName: $(SERVICE_NAME)
                     artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                     artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
-                    pipelineAlias: {{ config.meta.short_name }}
+                    pipelineAlias: {{ config.meta.canonical_name }}
                 - template: az/templates/deploy-namespaced-service.yml@templates

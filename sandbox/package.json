@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
       "prestart": "npm install",
-      "start": "node index.js"
+      "start": "node index.js",
+      "lint": "find . -type f -name '*.js' ! -name '.eslintrc.js' | grep -v 'node_modules/' | xargs eslint"
     },
     "keywords": [
       "swagger"

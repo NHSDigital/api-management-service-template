@@ -1,23 +1,10 @@
 name: "$(SourceBranchName)+$(BuildID)"
 
+# Prevents building every commit or on PR
 trigger: none
-
 pr: none
 
-variables:
-  SERVICE_NAME: {{ config.meta.canonical_name }}
-  SERVICE_BASE_PATH: {{ config.base_path }}
-
-parameters:
-  - name : artifactBranch
-    displayName: Artifact Branch (e.g. feature/myfeature or v1.0.0-alpha)
-    type: string
-    default: $(Build.SourceBranch)
-  - name : artifactBuildId
-    displayName: Artifact Build Id (e.g. run Id for the build to download). Overrides Artifact Branch if not "latest".
-    type: string
-    default: latest
-
+# Consume an artifact from the build pipeline as soon as it becomes available.
 resources:
   pipelines:
     - pipeline: "{{ config.meta.canonical_name }}"
@@ -32,6 +19,20 @@ resources:
       name: NHSDigital/api-management-utils
       ref: 'refs/heads/APM-1120-Template-Pipelines'
       endpoint: NHSDigital
+      
+variables:
+  SERVICE_NAME: {{ config.meta.canonical_name }}
+  SERVICE_BASE_PATH: {{ config.base_path }}
+
+parameters:
+  - name : artifactBranch
+    displayName: Artifact Branch (e.g. feature/myfeature or v1.0.0-alpha)
+    type: string
+    default: $(Build.SourceBranch)
+  - name : artifactBuildId
+    displayName: Artifact Build Id (e.g. run Id for the build to download). Overrides Artifact Branch if not "latest".
+    type: string
+    default: latest
 
 pool:
   vmImage: 'ubuntu-latest'

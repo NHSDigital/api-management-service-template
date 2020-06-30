@@ -56,7 +56,6 @@ stages:
               steps:
                 - template: az/templates/download-build-artifact.yml@templates
                   parameters:
-                    serviceName: $(SERVICE_NAME)
                     artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                     artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                     pipelineAlias: {{ config.meta.canonical_name }}

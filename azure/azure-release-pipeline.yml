@@ -19,10 +19,11 @@ resources:
       name: NHSDigital/api-management-utils
       ref: 'refs/heads/APM-1120-Template-Pipelines'
       endpoint: NHSDigital
-      
+
 variables:
   SERVICE_NAME: {{ config.meta.canonical_name }}
   SERVICE_BASE_PATH: {{ config.base_path }}
+  PROXY_NAME: live
 
 parameters:
   - name : artifactBranch
@@ -53,7 +54,6 @@ stages:
             steps:
               - template: az/templates/download-build-artifact.yml@templates
                 parameters:
-                  serviceName: $(SERVICE_NAME)
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.canonical_name }}
@@ -75,7 +75,6 @@ stages:
             steps:
               - template: az/templates/download-build-artifact.yml@templates
                 parameters:
-                  serviceName: $(SERVICE_NAME)
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.canonical_name }}
@@ -97,7 +96,6 @@ stages:
             steps:
               - template: az/templates/download-build-artifact.yml@templates
                 parameters:
-                  serviceName: $(SERVICE_NAME)
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.canonical_name }}
@@ -119,7 +117,6 @@ stages:
             steps:
               - template: az/templates/download-build-artifact.yml@templates
                 parameters:
-                  serviceName: $(SERVICE_NAME)
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.canonical_name }}
@@ -143,7 +140,6 @@ stages:
             steps:
               - template: az/templates/download-build-artifact.yml@templates
                 parameters:
-                  serviceName: $(SERVICE_NAME)
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.canonical_name }}
@@ -166,7 +162,6 @@ stages:
             steps:
               - template: az/templates/download-build-artifact.yml@templates
                 parameters:
-                  serviceName: $(SERVICE_NAME)
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.canonical_name }}
@@ -189,7 +184,6 @@ stages:
             steps:
               - template: az/templates/download-build-artifact.yml@templates
                 parameters:
-                  serviceName: $(SERVICE_NAME)
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.canonical_name }}
@@ -212,7 +206,6 @@ stages:
             steps:
               - template: az/templates/download-build-artifact.yml@templates
                 parameters:
-                  serviceName: $(SERVICE_NAME)
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.canonical_name }}
@@ -235,7 +228,6 @@ stages:
             steps:
               - template: az/templates/download-build-artifact.yml@templates
                 parameters:
-                  serviceName: $(SERVICE_NAME)
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.canonical_name }}
@@ -260,7 +252,6 @@ stages:
             steps:
               - template: az/templates/download-build-artifact.yml@templates
                 parameters:
-                  serviceName: $(SERVICE_NAME)
                   artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
                   artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
                   pipelineAlias: {{ config.meta.canonical_name }}

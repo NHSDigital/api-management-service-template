@@ -12,8 +12,9 @@ resources:
       trigger:
         branches:
           exclude:
-            - 'refs/tags/v*'
             - 'master'
+            - "refs/heads/master"
+            - 'refs/tags/v*'
   repositories:
     - repository: templates
       type: github
@@ -21,21 +22,12 @@ resources:
       ref: 'refs/heads/APM-1120-Template-Pipelines'
       endpoint: NHSDigital
 
-parameters:
-  - name : artifactBranch
-    displayName: Artifact Branch (e.g. feature/myfeature or v1.0.0-alpha)
-    type: string
-    default: $(Build.SourceBranch)
-  - name : artifactBuildId
-    displayName: Artifact Build Id (e.g. run Id for the build to download). Overrides Artifact Branch if not "latest".
-    type: string
-    default: latest
-
 variables:
   SERVICE_NAME: {{ config.meta.canonical_name }}
   SERVICE_BASE_PATH: {{ config.base_path }}
   FORCE_SANDBOX: false
   NAMESPACE: from_branchname
+  PROXY_NAME: live
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -55,8 +47,5 @@ stages:
             deploy:
               steps:
                 - template: az/templates/download-build-artifact.yml@templates
-                  parameters:
-                    artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
-                    artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
-                    pipelineAlias: {{ config.meta.canonical_name }}
+                - template: az/templates/setup-build-name.yml@templates
                 - template: az/templates/deploy-namespaced-service.yml@templates

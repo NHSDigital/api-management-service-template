@@ -12,6 +12,14 @@ pr:
   branches:
     include: ['*']
 
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: NHSDigital/api-management-utils
+      ref: 'refs/heads/APM-1120-Template-Pipelines'
+      endpoint: NHSDigital
+
 jobs:
   - job: build
     displayName: Build & Test
@@ -21,15 +29,11 @@ jobs:
     variables:
       API_TEST_ENV_FILE_PATH: "tests/e2e/environments/local.postman_environment.json"
       PIP_CACHE_DIR: ".poetry"
+      SERVICE_NAME: "{{ config.meta.canonical_name }}"
     steps:
       - checkout: self
 
-      - bash: echo "##vso[task.setvariable variable=BRANCH_NAME]`echo $(System.PullRequest.SourceBranch) | sed -r 's/[/|\\@":<>?*]+/-/g'`"
-        displayName: Set and replace invalid characters in branch name
-
-      - bash: 'echo "##vso[build.updatebuildnumber]$(BRANCH_NAME)+$(Build.BuildID)"'
-        condition: eq(variables['Build.SourceBranchName'], 'merge')
-        displayName: Update build ID if this is a pull request
+      - template: az/templates/setup-build-name.yml@templates
 
       - task: UsePythonVersion@0
         displayName: "Use Python 3.8"
@@ -85,4 +89,4 @@ jobs:
         displayName: Build Release Package
 
       - publish: dist/
-        artifact: '{{ config.meta.canonical_name }}-$(Build.BuildNumber)'
+        artifact: $(Build.BuildNumber)

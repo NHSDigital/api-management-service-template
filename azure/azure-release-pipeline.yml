@@ -23,7 +23,7 @@ resources:
 variables:
   SERVICE_NAME: {{ config.meta.canonical_name }}
   SERVICE_BASE_PATH: {{ config.base_path }}
-  PROXY_NAME: live
+  SPEC_FILE_NAME: {{ config.meta.canonical_name }}
 
 parameters:
   - name : artifactBranch
@@ -44,6 +44,8 @@ stages:
   variables:
   - group: apigee-nonprod
   - group: env-internal-dev
+  - name: PROXY_NAME
+    value: live
   jobs:
     - deployment: DeployService
       displayName: Deploy Service
@@ -52,11 +54,8 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: az/templates/download-build-artifact.yml@templates
-                parameters:
-                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
-                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
-                  pipelineAlias: {{ config.meta.canonical_name }}
+              - template: az/templates/pre-tasks.yml@templates
+              - template: az/templates/setup-build-name.yml@templates
               - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployInternalQA
@@ -65,6 +64,8 @@ stages:
   variables:
     - group: apigee-nonprod
     - group: env-internal-qa
+    - name: PROXY_NAME
+      value: live
   jobs:
     - deployment: DeployService
       displayName: Deploy Service
@@ -73,11 +74,8 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: az/templates/download-build-artifact.yml@templates
-                parameters:
-                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
-                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
-                  pipelineAlias: {{ config.meta.canonical_name }}
+              - template: az/templates/pre-tasks.yml@templates
+              - template: az/templates/setup-build-name.yml@templates
               - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployInternalQASandbox
@@ -86,6 +84,8 @@ stages:
   variables:
     - group: apigee-nonprod
     - group: env-internal-qa-sandbox
+    - name: PROXY_NAME
+      value: sandbox
   jobs:
     - deployment: DeployService
       displayName: Deploy Service
@@ -94,11 +94,8 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: az/templates/download-build-artifact.yml@templates
-                parameters:
-                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
-                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
-                  pipelineAlias: {{ config.meta.canonical_name }}
+              - template: az/templates/pre-tasks.yml@templates
+              - template: az/templates/setup-build-name.yml@templates
               - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployInternalPortal
@@ -115,11 +112,6 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: az/templates/download-build-artifact.yml@templates
-                parameters:
-                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
-                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
-                  pipelineAlias: {{ config.meta.canonical_name }}
               - template: az/templates/deploy-specs.yml@templates
 
 - stage: DeployRef
@@ -130,6 +122,8 @@ stages:
   variables:
     - group: apigee-nonprod
     - group: env-ref
+    - name: PROXY_NAME
+      value: live
   jobs:
     - deployment: DeployService
       displayName: Deploy Service
@@ -138,11 +132,8 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: az/templates/download-build-artifact.yml@templates
-                parameters:
-                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
-                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
-                  pipelineAlias: {{ config.meta.canonical_name }}
+              - template: az/templates/pre-tasks.yml@templates
+              - template: az/templates/setup-build-name.yml@templates
               - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployDev
@@ -152,6 +143,8 @@ stages:
   variables:
     - group: apigee-prod
     - group: env-dev
+    - name: PROXY_NAME
+      value: live
   jobs:
     - deployment: DeployService
       displayName: Deploy Service
@@ -160,11 +153,8 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: az/templates/download-build-artifact.yml@templates
-                parameters:
-                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
-                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
-                  pipelineAlias: {{ config.meta.canonical_name }}
+              - template: az/templates/pre-tasks.yml@templates
+              - template: az/templates/setup-build-name.yml@templates
               - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployProd
@@ -174,6 +164,8 @@ stages:
   variables:
     - group: apigee-prod
     - group: env-prod
+    - name: PROXY_NAME
+      value: live
   jobs:
     - deployment: DeployService
       displayName: Deploy Service
@@ -182,11 +174,8 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: az/templates/download-build-artifact.yml@templates
-                parameters:
-                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
-                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
-                  pipelineAlias: {{ config.meta.canonical_name }}
+              - template: az/templates/pre-tasks.yml@templates
+              - template: az/templates/setup-build-name.yml@templates
               - template: az/templates/deploy-service.yml@templates
 
 - stage: DeploySandbox
@@ -196,6 +185,8 @@ stages:
   variables:
     - group: apigee-prod
     - group: env-sandbox
+    - name: PROXY_NAME
+      value: sandbox
   jobs:
     - deployment: DeployService
       displayName: Deploy Service
@@ -204,11 +195,8 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: az/templates/download-build-artifact.yml@templates
-                parameters:
-                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
-                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
-                  pipelineAlias: {{ config.meta.canonical_name }}
+              - template: az/templates/pre-tasks.yml@templates
+              - template: az/templates/setup-build-name.yml@templates
               - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployInt
@@ -218,6 +206,8 @@ stages:
   variables:
     - group: apigee-prod
     - group: env-int
+    - name: PROXY_NAME
+      value: live
   jobs:
     - deployment: DeployService
       displayName: Deploy Service
@@ -226,11 +216,8 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: az/templates/download-build-artifact.yml@templates
-                parameters:
-                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
-                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
-                  pipelineAlias: {{ config.meta.canonical_name }}
+              - template: az/templates/pre-tasks.yml@templates
+              - template: az/templates/setup-build-name.yml@templates
               - template: az/templates/deploy-service.yml@templates
 
 - stage: DeployPortal
@@ -250,9 +237,4 @@ stages:
         runOnce:
           deploy:
             steps:
-              - template: az/templates/download-build-artifact.yml@templates
-                parameters:
-                  artifactBuildId: {{ '${{ parameters.artifactBuildId }}' }}
-                  artifactBranch: {{ '${{ parameters.artifactBranch }}' }}
-                  pipelineAlias: {{ config.meta.canonical_name }}
               - template: az/templates/deploy-specs.yml@templates

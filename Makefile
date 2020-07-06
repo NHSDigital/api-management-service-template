@@ -15,7 +15,6 @@ install-hooks:
 lint:
 	npm run lint
 	poetry run flake8 **/*.py
-	find -name '*.sh' | grep -v node_modules | xargs shellcheck
 
 clean:
 	rm -rf build
@@ -44,6 +43,7 @@ build-proxy:
 release: clean publish build-proxy
 	mkdir -p dist
 	cp -r build/. dist
+	cp -R terraform dist
 
 test:
 	echo "TODO: add tests"

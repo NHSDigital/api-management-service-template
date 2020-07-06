@@ -102,6 +102,7 @@ stages:
         runOnce:
           deploy:
             steps:
+              - template: az/templates/pre-tasks.yml@templates
               - template: az/templates/deploy-specs.yml@templates
 
 - stage: DeployRef

@@ -25,16 +25,6 @@ variables:
   SERVICE_BASE_PATH: {{ config.base_path }}
   SPEC_FILE_NAME: {{ config.meta.canonical_name }}
 
-parameters:
-  - name : artifactBranch
-    displayName: Artifact Branch (e.g. feature/myfeature or v1.0.0-alpha)
-    type: string
-    default: $(Build.SourceBranch)
-  - name : artifactBuildId
-    displayName: Artifact Build Id (e.g. run Id for the build to download). Overrides Artifact Branch if not "latest".
-    type: string
-    default: latest
-
 pool:
   vmImage: 'ubuntu-latest'
 

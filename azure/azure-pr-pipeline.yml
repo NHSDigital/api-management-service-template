@@ -26,6 +26,8 @@ resources:
 variables:
   SERVICE_NAME: {{ config.meta.canonical_name }}
   SERVICE_BASE_PATH: {{ config.base_path }}
+  PRODUCT_DISPLAY_NAME: {{ config.meta.name }}
+  PRODUCT_DESCRIPTION: {{ config.meta.description }}
   FORCE_SANDBOX: false
   NAMESPACE: from_branchname
   PROXY_NAME: live

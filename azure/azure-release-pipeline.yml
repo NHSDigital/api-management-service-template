@@ -19,11 +19,14 @@ resources:
       name: NHSDigital/api-management-utils
       ref: 'refs/heads/APM-1120-Template-Pipelines'
       endpoint: NHSDigital
-
+      
+# env variables
 variables:
   SERVICE_NAME: {{ config.meta.canonical_name }}
   SERVICE_BASE_PATH: {{ config.base_path }}
   SPEC_FILE_NAME: {{ config.meta.canonical_name }}
+  PRODUCT_DISPLAY_NAME: {{ config.meta.name }}
+  PRODUCT_DESCRIPTION: {{ config.meta.description }}
 
 pool:
   vmImage: 'ubuntu-latest'

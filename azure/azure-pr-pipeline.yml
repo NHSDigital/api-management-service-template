@@ -28,6 +28,7 @@ variables:
   SERVICE_BASE_PATH: {{ config.base_path }}
   PRODUCT_DISPLAY_NAME: {{ config.meta.name }}
   PRODUCT_DESCRIPTION: {{ config.meta.description }}
+  AWS_ENV: ptl
   FORCE_SANDBOX: false
   NAMESPACE: from_branchname
   PROXY_NAME: live

@@ -27,6 +27,7 @@ variables:
   SPEC_FILE_NAME: {{ config.meta.canonical_name }}
   PRODUCT_DISPLAY_NAME: {{ config.meta.name }}
   PRODUCT_DESCRIPTION: {{ config.meta.description }}
+  AWS_ENV: ptl
 
 pool:
   vmImage: 'ubuntu-latest'

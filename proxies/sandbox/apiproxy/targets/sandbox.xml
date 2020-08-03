@@ -1,18 +1,7 @@
 <TargetEndpoint name="sandbox">
     <Description/>
     <FaultRules/>
-    <Flows>
-      <Flow name="AddStatusToPing">
-        <Description/>
-        <Request/>
-        <Response>
-          <Step>
-            <Name>AssignMessage.AddStatusToPing</Name>
-          </Step>
-        </Response>
-        <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "GET"))</Condition>
-      </Flow>
-    </Flows>
+    <Flows/>
     <PostFlow name="PostFlow">
         <Request/>
         <Response/>
@@ -25,9 +14,6 @@
           </Step>
         </Response>
     </PreFlow>
-  <RouteRule name="NoRoutePing">
-    <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
-  </RouteRule>
   <HostedTarget>
         <Properties/>
     </HostedTarget>

@@ -4,7 +4,8 @@ dist/
 build/
 public/
 newman/
-
+.idea
+.DS_Store
 .#*
 
 __pycache__/

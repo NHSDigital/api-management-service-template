@@ -19,17 +19,6 @@
         </Response>
         <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
       </Flow>
-      <Flow name="Flow.AuthApiKey">
-        <Request>
-          <Step>
-            <Name>VerifyApiKey.XApiKey</Name>
-          </Step>
-        </Request>
-        <Response/>
-        <!-- This will return 404 because /_status doesn't exist for the backend. Either implement _status for your backend
-        or use a service-callout to call health-check endpoint -->
-        <Condition>(proxy.pathsuffix MatchesPath "/_status") and (request.verb = "GET")</Condition>
-      </Flow>
     </Flows>
     <PreFlow/>
     <HTTPProxyConnection>

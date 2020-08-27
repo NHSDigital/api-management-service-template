@@ -1,4 +1,4 @@
-# {{ config.meta.name }}
+# {{ config.meta.product_display_name }}
 
 ![Build](https://github.com/NHSDigital/{{ config.meta.canonical_name }}/workflows/Build/badge.svg?branch=master)
 

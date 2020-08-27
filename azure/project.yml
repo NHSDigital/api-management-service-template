@@ -4,4 +4,4 @@ variables:
   service_base_path: {{ config.meta.service_base_path }}
   product_display_name: {{ config.meta.product_display_name }}
   product_description: {{ config.meta.product_description }}
-  spec_file: '{{ config.meta.spec_file }}.json'
+  spec_file: '{{ config.meta.service_name }}.json'

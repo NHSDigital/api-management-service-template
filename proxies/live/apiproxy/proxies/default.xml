@@ -31,7 +31,7 @@
     <RouteRule name="NoRoutePing">
       <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
     </RouteRule>
-    <RouteRule name="{{ config.meta.canonical_name }}-target">
-        <TargetEndpoint>{{ config.meta.canonical_name }}-target</TargetEndpoint>
+    <RouteRule name="{{ config.meta.service_name }}-target">
+        <TargetEndpoint>{{ config.meta.service_name }}-target</TargetEndpoint>
     </RouteRule>
 </ProxyEndpoint>

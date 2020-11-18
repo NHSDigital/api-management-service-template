@@ -7,6 +7,11 @@ info:
   title: Example Test Service (FHIR) API
   description: Overview
 
+  contact:
+    name: Example Test FHIR API Support
+    url: 'https://digital.nhs.uk/developer/help-and-support'
+    email: api.management@nhs.net
+
 servers:
   - url: 'https://sandbox.api.service.nhs.uk/example-test'
     description: Sandbox environment.
@@ -19,6 +24,7 @@ paths:
   /users:
     get:
       summary: Returns a list of users.
+      operationId: search-patient
       description: Optional extended description in CommonMark or HTML.
       responses:
         '200':    # status code

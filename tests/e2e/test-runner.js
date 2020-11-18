@@ -17,7 +17,7 @@ const puppeteer = require('puppeteer');
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
+} 
 
 async function retry(func, times) {
     let result;

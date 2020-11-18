@@ -1,0 +1,9 @@
+# This is an OpenAPI Specification (https://swagger.io/specification/)
+# for the Personal Demographics Service (PDS) API
+# owned by NHS Digital (https://digital.nhs.uk/)
+openapi: "3.0.0"
+info:
+  version: "{VERSION}"
+  title: Example Test Service (FHIR) API
+  description: |
+    ## Overview

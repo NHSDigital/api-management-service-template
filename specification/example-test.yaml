@@ -25,6 +25,9 @@ paths:
     get:
       summary: Returns a list of users.
       operationId: search-patient
+      externalDocs:
+        description: ODS codes and documentation.
+        url: https://fhir.nhs.uk/Id/ods-organization-code
       description: Optional extended description in CommonMark or HTML.
       responses:
         '200':    # status code

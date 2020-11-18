@@ -1,7 +1,7 @@
 variables:
-  service_name: example-test
+  service_name: example-template
   short_service_name: ets
-  service_base_path: example-test
-  product_display_name: Example Test Service
+  service_base_path: example-template
+  product_display_name: example template Service
   product_description: " "
-  spec_file: example-test-service.json
+  spec_file: example-template-service.json

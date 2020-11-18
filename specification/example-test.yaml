@@ -4,20 +4,20 @@
 openapi: "3.0.0"
 info:
   version: "{VERSION}"
-  title: Example Test Service (FHIR) API
+  title: example template Service (FHIR) API
   description: Overview
 
   contact:
-    name: Example Test FHIR API Support
+    name: example template FHIR API Support
     url: 'https://digital.nhs.uk/developer/help-and-support'
     email: api.management@nhs.net
 
 servers:
-  - url: 'https://sandbox.api.service.nhs.uk/example-test'
+  - url: 'https://sandbox.api.service.nhs.uk/example-template'
     description: Sandbox environment.
-  - url: 'https://int.api.service.nhs.uk/example-test'
+  - url: 'https://int.api.service.nhs.uk/example-template'
     description: Integration test environment.
-  - url: 'https://api.service.nhs.uk/example-test'
+  - url: 'https://api.service.nhs.uk/example-template'
     description: 'Production environment.'
 
 tags:

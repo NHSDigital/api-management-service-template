@@ -1,4 +1,4 @@
-# {{ config.meta.product_display_name }}
+# example-template-service-api
 
 ![Build](https://github.com/NHSDigital/{{ config.meta.service_name }}/workflows/Build/badge.svg?branch=master)
 

@@ -11,7 +11,7 @@ resources:
       endpoint: NHSDigital
   pipelines:
   - pipeline: build_pipeline
-    source: "Example-Test-Service-Build"
+    source: "example-template-Service-Build"
     trigger:
       branches:
         include:

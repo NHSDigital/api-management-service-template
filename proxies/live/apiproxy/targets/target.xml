@@ -1,4 +1,4 @@
-<TargetEndpoint name="example-test-target">
+<TargetEndpoint name="example-template-target">
   <FaultRules>
     <FaultRule name="access_token_expired">
       <Step>
@@ -37,7 +37,7 @@
         <Enabled>true</Enabled>
       </SSLInfo>
       <LoadBalancer>
-        <Server name="example-test-target" />
+        <Server name="example-template-target" />
       </LoadBalancer>
     </HTTPTargetConnection>
   -->

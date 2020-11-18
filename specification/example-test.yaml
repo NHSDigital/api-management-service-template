@@ -9,10 +9,13 @@ info:
     ## Overview
 
 servers:
-  - url: http://api.example.com/v1
-    description: Optional server description, e.g. Main (production) server
-  - url: http://staging-api.example.com
-    description: Optional server description, e.g. Internal staging server for testing
+  - url: 'https://sandbox.api.service.nhs.uk/example-test'
+    description: Sandbox environment.
+  - url: 'https://int.api.service.nhs.uk/example-test'
+    description: Integration test environment.
+  - url: 'https://api.service.nhs.uk/example-test'
+    description: 'Production environment.'
+
 paths:
   /users:
     get:

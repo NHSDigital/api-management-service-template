@@ -1,0 +1,6 @@
+
+docker_containers:
+
+  - name: ets-sandbox
+    dockerfile: "sandbox/Dockerfile"
+    path: "sandbox"

@@ -1,6 +1,6 @@
 name: Build
 
-on: push
+on: push 
 
 jobs:
   build:
@@ -61,8 +61,8 @@ jobs:
       - name: Lint
         run: make lint
 
-      - name: Check resources are valid FHIR 4.0.1
-        run: make validate
+      # - name: Check resources are valid FHIR 4.0.1
+      #   run: make validate
 
       - name: Compile spec
         run: make publish

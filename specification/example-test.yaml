@@ -5,8 +5,7 @@ openapi: "3.0.0"
 info:
   version: "{VERSION}"
   title: Example Test Service (FHIR) API
-  description: |
-    ## Overview
+  description: Overview
 
 servers:
   - url: 'https://sandbox.api.service.nhs.uk/example-test'

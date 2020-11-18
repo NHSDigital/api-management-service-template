@@ -55,7 +55,7 @@
     <RouteRule name="NoRouteStatus">
       <Condition>(proxy.pathsuffix MatchesPath "/_status") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
     </RouteRule>
-    <RouteRule name="{{ config.meta.service_name }}-target">
-        <TargetEndpoint>{{ config.meta.service_name }}-target</TargetEndpoint>
+    <RouteRule name="example-test-target">
+        <TargetEndpoint>example-test-target</TargetEndpoint>
     </RouteRule>
 </ProxyEndpoint>

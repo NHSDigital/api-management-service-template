@@ -1,4 +1,4 @@
-<TargetEndpoint name="{{ config.meta.service_name }}-target">
+<TargetEndpoint name="example-test-target">
   <FaultRules>
     <FaultRule name="access_token_expired">
       <Step>
@@ -37,7 +37,7 @@
         <Enabled>true</Enabled>
       </SSLInfo>
       <LoadBalancer>
-        <Server name="{{ config.meta.service_name }}-target" />
+        <Server name="example-test-target" />
       </LoadBalancer>
     </HTTPTargetConnection>
   -->

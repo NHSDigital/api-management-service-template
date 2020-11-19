@@ -4,4 +4,4 @@ variables:
   service_base_path: example-template
   product_display_name: example template Service
   product_description: " "
-  spec_file: example-template-service.json
+  spec_file: Example-Template-Service.json

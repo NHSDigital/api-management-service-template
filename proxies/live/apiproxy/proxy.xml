@@ -1,4 +1,4 @@
 <APIProxy name="ets">
   <!-- This is the root of the application -->
-  <Description>Proxy to example-template-service-api endpoints.</Description>
+  <Description>Proxy to Example-Template-Service-api endpoints.</Description>
 </APIProxy>

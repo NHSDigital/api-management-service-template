@@ -1,0 +1,63 @@
+DESCRIPTION: {{ config.meta.description }}
+APIGEE_ENVIRONMENTS:
+  - name: internal-dev
+    display_name: Internal Development
+  - name: internal-dev-sandbox
+    display_name: Internal Development Sandbox
+  - name: internal-qa
+    display_name: Internal QA
+  - name: internal-qa-sandbox
+    display_name: Internal QA Sandbox
+  - name: ref
+    display_name: Reference
+  - name: sandbox
+    display_name: Sandbox
+# Enable int environment when ready by uncommenting:
+#   - name: int
+#     display_name: Integration Testing
+---
+meta:
+  api:
+    name: {{ config.meta.service_name }}
+    guid: 96836235-09a5-4064-9220-0812765ebdd7
+    spec_guids:
+      - 0af08cfb-6835-47b5-867c-95d41ef849b5
+  schema_version: 1.1
+apigee:
+  environments:
+{% for ENV in APIGEE_ENVIRONMENTS %}
+{% set TITLE = config.meta.product_display_name + '(' + ENV.display_name + ' Environment)' %}
+{% set NAME = config.meta.service_name + '-'' + ENV.name %}
+  - name: {{ ENV.name }}
+    products:
+      - name: {{ NAME }}
+        approvalType: auto
+        attributes:
+          - name: access
+            value: public
+          - name: ratelimit
+            value: 5ps
+        description: {{ DESCRIPTION }}
+        displayName: {{ TITLE }}
+        environments: [ {{ ENV.name }} ]
+        proxies:
+          - {{ config.meta.service_name }}-{{ ENV.name }}
+          - identity-service-{{ ENV.name }}
+        scopes:
+          - 'urn:nhsd:apim:app:level3:{{ config.meta.service_name }}'
+          - 'urn:nhsd:apim:user-nhs-id:aal3:{{ config.meta.service_name }}'
+        quota: '300'
+        quotaInterval: '1'
+        quotaTimeUnit: minute
+    specs:
+      - name: {{ NAME }}
+        path: {{ config.meta.service_name }}.json
+    api_catalog:
+      - edgeAPIProductName: {{ NAME }}
+        anonAllowed: true
+        description: {{ DESCRIPTION }}
+        requireCallbackUrl: false
+        title: {{ TITLE }}
+        visibility: false
+        specId: {{ NAME }}
+{% endfor %}

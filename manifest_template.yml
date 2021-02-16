@@ -20,14 +20,13 @@ APIGEE_ENVIRONMENTS:
 meta:
   api:
     name: {{ config.meta.service_name }}
-    guid: 96836235-09a5-4064-9220-0812765ebdd7
+    guid: {{ config.x-nhs-api-guid }}
     spec_guids:
-      - 0af08cfb-6835-47b5-867c-95d41ef849b5
+      - {{ config.x-nhs-api-spec-guid }}
   schema_version: 1.1
 apigee:
   environments:
-{% raw %}
-{% for ENV in APIGEE_ENVIRONMENTS %}
+{% raw %}{% for ENV in APIGEE_ENVIRONMENTS %}
 {% set TITLE = SERVICE_NAME + '(' + ENV.display_name + ' Environment)' %}
 {% set NAME = SERVICE_NAME + '-' + ENV.name %}
   - name: {{ ENV.name }}
@@ -62,5 +61,4 @@ apigee:
         title: {{ TITLE }}
         visibility: false
         specId: {{ NAME }}
-{% endfor %}
-{% endraw %}
+{% endfor %}{% endraw %}

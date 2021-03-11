@@ -1,4 +1,4 @@
 docker_containers:
-  - name: {{ config.meta.short_service_name }}-sandbox
+  - name: {{ config['x-meta'].short_service_name }}-sandbox
     dockerfile: "sandbox/Dockerfile"
     path: "sandbox"

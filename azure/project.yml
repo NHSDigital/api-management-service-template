@@ -1,7 +1,7 @@
 variables:
-  service_name: {{ config.meta.service_name }}
-  short_service_name: {{ config.meta.short_service_name }}
-  service_base_path: {{ config.meta.service_base_path }}
-  product_display_name: {{ config.meta.product_display_name }}
-  product_description: {{ config.meta.product_description }}
-  spec_file: {{ config.meta.service_name }}.json
+  service_name: {{ config['x-meta'].service_name }}
+  short_service_name: {{ config['x-meta'].short_service_name }}
+  service_base_path: {{ config['x-meta'].service_base_path }}
+  product_display_name: {{ config['x-meta'].product_display_name }}
+  product_description: {{ config['x-meta'].product_description }}
+  spec_file: {{ config['x-meta'].service_name }}.json

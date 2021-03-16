@@ -14,7 +14,7 @@ install-hooks:
 
 lint:
 	npm run lint
-	poetry run flake8 **/*.py
+	find . -name '*.py' | xargs poetry run flake8
 
 clean:
 	rm -rf build
@@ -43,9 +43,10 @@ build-proxy:
 release: clean publish build-proxy
 	mkdir -p dist
 	cp -r build/. dist
-
-	cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox
-	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-qa-sandbox
+	cp -r tests dist
+	cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox.yml
+	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-qa-sandbox.yml
+	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-dev-sandbox.yml
 
 test:
-	echo "TODO: add tests"
+	poetry run pytest -v

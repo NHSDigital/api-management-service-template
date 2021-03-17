@@ -74,6 +74,6 @@ class TestEndpoints:
     @pytest.mark.ping
     def test_ping_endpoint(self):
         """Test that the ping endpoint returns 200"""
-        response = requests.get(f"{config.BASE_URL}/{config.PROXY}/_ping")
+        response = requests.get(f"{config.BASE_URL}/{config.BASE_PATH}/_ping")
         assert response.status_code == 200
         assert list(response.json().keys()) == ['version', 'revision', 'releaseId', 'commitId']

@@ -4,8 +4,8 @@ steps:
     displayName: Setup pytests
 
   - bash: |
-      export APIGEE_ENVIRONMENT="$(APIGEE_ENVIRONMENT)"
-      export APIGEE_PROXY="$(FULLY_QUALIFIED_SERVICE_NAME)"
+      export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
+      export SERVICE_BASE_PATH="$(SERVICE_BASE_PATH)"
 
       poetry run pytest -v --junitxml=test-report.xml -m ping
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests

@@ -15,5 +15,5 @@ def get_env(variable_name: str) -> str:
 ENV = {
     # Apigee
     "environment": get_env("APIGEE_ENVIRONMENT"),
-    "proxy": get_env("APIGEE_PROXY"),
+    "base_path": get_env("SERVICE_BASE_PATH"),
 }

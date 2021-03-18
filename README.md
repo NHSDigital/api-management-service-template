@@ -118,6 +118,8 @@ Successful deployment of the API Proxy requires:
 
  1. A *Target Server* named `{{ config['x-meta'].service_name }}-target`
  2. A *Key-Value Map* named `{{ config['x-meta'].short_service_name }}-variables`, containing any values you might need at proxy runtime
- 2. A *Key-Value Map* named `{{ config['x-meta'].short_service_name }}-variables-encrypted`, containing any secrets you might need at proxy runtime
+ 3. A *Key-Value Map* named `{{ config['x-meta'].short_service_name }}-variables-encrypted`, containing any secrets you might need at proxy runtime
+
+The Key-Value maps need to be specifed within the [api-management-infrasture](https://github.com/NHSDigital/api-management-infrastructure) repository to be able to be used with the API proxy.
 
 :bulb: For Sandbox-running environments (`test`) these need to be present for successful deployment but can be set to empty/dummy values.

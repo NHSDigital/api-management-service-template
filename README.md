@@ -86,33 +86,7 @@ Swagger UI unfortunately doesn't correctly render `$ref`s in examples, so use `s
 #### Apigee Portal
 The Apigee portal will not automatically pull examples from schemas, you must specify them manually.
 
-## Deployment
-
-### Specification
-Update the API Specification and derived documentation in the Portal.
-
-`make deploy-spec` with environment variables:
-
-* `APIGEE_USERNAME`
-* `APIGEE_PASSWORD`
-* `APIGEE_SPEC_ID`
-* `APIGEE_PORTAL_API_ID`
-
-### API Proxy & Sandbox Service
-Redeploy the API Proxy and hosted Sandbox service.
-
-`make deploy-proxy` with environment variables:
-
-* `APIGEE_USERNAME`
-* `APIGEE_PASSWORD`
-* `APIGEE_ORGANIZATION`
-* `APIGEE_ENVIRONMENTS` - Comma-separated list of environments to deploy to (e.g. `test,prod`)
-* `APIGEE_APIPROXY` - Name of the API Proxy for deployment
-* `APIGEE_BASE_PATH` - The proxy's base path (must be unique)
-
-:bulb: Specify your own API Proxy (with base path) for use during development.
-
-#### Platform setup
+### Platform setup
 
 Successful deployment of the API Proxy requires:
 

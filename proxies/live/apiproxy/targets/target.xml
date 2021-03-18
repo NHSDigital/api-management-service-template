@@ -1,4 +1,4 @@
-<TargetEndpoint name="{{ config.meta.service_name }}-target">
+<TargetEndpoint name="{{ config['x-meta'].service_name }}-target">
   <FaultRules>
     <FaultRule name="access_token_expired">
       <Step>
@@ -13,6 +13,9 @@
   <PreFlow>
     <Request>
       <Step>
+        <Name>OauthV2.VerifyAccessToken</Name>
+      </Step>
+      <Step>
         <!-- This will return 404 because /_status doesn't exist for the backend. Either implement _status for your backend
         or use a service-callout to call health-check endpoint -->
         <Name>VerifyApiKey.XApiKey</Name>
@@ -20,6 +23,7 @@
       </Step>
       <Step>
         <Name>AssignMessage.RenameQuotaVarsFromVerifyAPIKeyPolicyClientId</Name>
+        <Condition>(proxy.pathsuffix MatchesPath "/_status") and (request.verb = "GET")</Condition>
       </Step>
       <Step>
         <Name>Quota</Name>
@@ -37,7 +41,7 @@
         <Enabled>true</Enabled>
       </SSLInfo>
       <LoadBalancer>
-        <Server name="{{ config.meta.service_name }}-target" />
+        <Server name="{{ config['x-meta'].service_name }}-target" />
       </LoadBalancer>
     </HTTPTargetConnection>
   -->

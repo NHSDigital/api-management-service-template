@@ -1,6 +1,6 @@
-SERVICE_NAME: {{ config.meta.service_name }}
-PRODUCT_DISPLAY_NAME: {{ config.meta.product_display_name }}
-DESCRIPTION: {{ config.meta.product_description }}
+SERVICE_NAME: {{ config['x-meta'].service_name }}
+PRODUCT_DISPLAY_NAME: {{ config['x-meta'].product_display_name }}
+DESCRIPTION: {{ config['x-meta'].product_description }}
 APIGEE_ENVIRONMENTS:
   - name: internal-dev
     display_name: Internal Development
@@ -20,7 +20,7 @@ APIGEE_ENVIRONMENTS:
 ---
 meta:
   api:
-    name: {{ config.meta.service_name }}
+    name: {{ config['x-meta'].service_name }}
     guid: {{ config.guid }}
     spec_guids:
       - {{ config.spec_guid }}
@@ -28,7 +28,7 @@ meta:
 apigee:
   environments:
 {% raw %}{% for ENV in APIGEE_ENVIRONMENTS %}
-{% set TITLE = PRODUCT_DISPLAY_NAME + '(' + ENV.display_name + ' Environment)' %}
+{% set TITLE = PRODUCT_DISPLAY_NAME + ' (' + ENV.display_name + ' Environment)' %}
 {% set NAME = SERVICE_NAME + '-' + ENV.name %}
   - name: {{ ENV.name }}
     products:

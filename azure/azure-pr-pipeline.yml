@@ -12,7 +12,7 @@ resources:
       endpoint: NHSDigital
   pipelines:
   - pipeline: build_pipeline
-    source: "{{ config.meta.pipeline_name_prefix }}-Build"
+    source: "{{ config['x-meta'].pipeline_name_prefix }}-Build"
     trigger:
       branches:
         exclude:
@@ -35,4 +35,12 @@ extends:
     product_display_name: ${{ '{{' }} variables.product_display_name {{ '}}' }}
     product_description: ${{ '{{' }} variables.product_description {{ '}}' }}
     spec_file: ${{ '{{' }} variables.spec_file {{ '}}' }}
-    deploy_review_sandbox: true
+    apigee_deployments:
+      - environment: internal-dev
+        make_spec_visible: true
+        post_deploy:
+          - template: ./templates/run-ping-tests.yml
+      - environment: internal-dev-sandbox
+        proxy_path: sandbox
+        post_deploy:
+          - template: ./templates/run-ping-tests.yml

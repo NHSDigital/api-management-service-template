@@ -1,6 +1,4 @@
-import requests
 import pytest
-from .configuration import config
 from api_test_utils.oauth_helper import OauthHelper
 from api_test_utils.apigee_api_apps import ApigeeApiDeveloperApps
 from api_test_utils.apigee_api_products import ApigeeApiProducts
@@ -71,9 +69,3 @@ class TestEndpoints:
         """
         pass
 
-    @pytest.mark.ping
-    def test_ping_endpoint(self):
-        """Test that the ping endpoint returns 200"""
-        response = requests.get(f"{config.BASE_URL}/{config.BASE_PATH}/_ping")
-        assert response.status_code == 200
-        assert list(response.json().keys()) == ['version', 'revision', 'releaseId', 'commitId']

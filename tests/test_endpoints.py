@@ -68,4 +68,3 @@ class TestEndpoints:
         You can use the 'get_token' fixture to call the proxy with a access token
         """
         pass
-

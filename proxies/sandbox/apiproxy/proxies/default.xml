@@ -7,9 +7,7 @@
           <Name>AssignMessage.AddCors</Name>
         </Step>
       </Response>
-      <Condition>request.verb == "OPTIONS" AND request.header.origin != null AND
-        request.header.Access-Control-Request-Method != null
-      </Condition>
+      <Condition>(request.verb = "OPTIONS") and (request.header.origin != null) and (request.header.Access-Control-Request-Method != null)</Condition>
     </Flow>
     <Flow name="AddPayloadToPing">
       <Description/>
@@ -59,9 +57,7 @@
     </Condition>
   </RouteRule>
   <RouteRule name="NoRoute">
-    <Condition>request.verb == "OPTIONS" AND request.header.origin != null AND
-      request.header.Access-Control-Request-Method != null
-    </Condition>
+    <Condition>(request.verb = "OPTIONS") and (request.header.origin != null) and (request.header.Access-Control-Request-Method != null)</Condition>
   </RouteRule>
   <RouteRule name="sandbox">
     <TargetEndpoint>sandbox</TargetEndpoint>

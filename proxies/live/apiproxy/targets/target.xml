@@ -16,16 +16,6 @@
         <Name>OauthV2.VerifyAccessToken</Name>
       </Step>
       <Step>
-        <!-- This will return 404 because /_status doesn't exist for the backend. Either implement _status for your backend
-        or use a service-callout to call health-check endpoint -->
-        <Name>VerifyApiKey.XApiKey</Name>
-        <Condition>(proxy.pathsuffix MatchesPath "/_status") and (request.verb = "GET")</Condition>
-      </Step>
-      <Step>
-        <Name>AssignMessage.RenameQuotaVarsFromVerifyAPIKeyPolicyClientId</Name>
-        <Condition>(proxy.pathsuffix MatchesPath "/_status") and (request.verb = "GET")</Condition>
-      </Step>
-      <Step>
         <Name>Quota</Name>
       </Step>
       <Step>

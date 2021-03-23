@@ -5,9 +5,9 @@ docker_service:
       - name: NODE_ENV
         value: production
       - name: LOG_LEVEL
-        value: "{%{{ 'debug' if APIGEE_ENVIRONMENT == 'internal-dev' else 'info' }}%}"
+        value: "{% raw %}{{ 'debug' if APIGEE_ENVIRONMENT == 'internal-dev' else 'info' }}{% endraw %}"
       - name: VERSION_INFO
-        value: "{%{{ version_info | to_json }}%}"
+        value: "{% raw %}{{ version_info | to_json }}{% endraw %}"
     health_check:
       matcher: "200"
       path: "/_ping"

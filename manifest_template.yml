@@ -1,5 +1,5 @@
 SERVICE_NAME: {{ config['x-meta'].service_name }}
-PRODUCT_DISPLAY_NAME: {{ config['x-meta'].product_display_name }}
+PRODUCT_DISPLAY_NAME: {{ config['x-meta'].product_display_name | config['x-meta'].service_name }}
 DESCRIPTION: {{ config['x-meta'].product_description }}
 APIGEE_ENVIRONMENTS:
   - name: internal-dev

@@ -25,5 +25,5 @@ variables:
 extends:
   template: azure/common/apigee-build.yml@common
   parameters:
-    service_name: ${{ variables.service_name }}
-    short_service_name: ${{ variables.short_service_name }}
+    service_name: {% raw %}${{ variables.service_name }}{% endraw %}
+    short_service_name: {% raw %}${{ variables.short_service_name }}{% endraw %}

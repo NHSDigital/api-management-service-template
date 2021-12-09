@@ -40,7 +40,7 @@ describe("app handler tests", function () {
             .expect(200, {
                 status: "pass",
                 ping: "pong",
-                service: "{{ config['x-meta'].service_name }}",
+                service: "{{ SERVICE_NAME }}",
                 version: version_info
             })
             .expect("Content-Type", /json/, done);
@@ -52,7 +52,7 @@ describe("app handler tests", function () {
             .expect(200, {
                 status: "pass",
                 ping: "pong",
-                service: "{{ config['x-meta'].service_name }}",
+                service: "{{ SERVICE_NAME }}",
                 version: version_info
             })
             .expect("Content-Type", /json/, done);

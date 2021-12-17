@@ -88,12 +88,8 @@ The Apigee portal will not automatically pull examples from schemas, you must sp
 
 ### Platform setup
 
-Successful deployment of the API Proxy requires:
-
- 1. A *Target Server* named `{{ SERVICE_NAME }}-target`
- 2. A *Key-Value Map* named `{{ SHORT_SERVICE_NAME }}-variables`, containing any values you might need at proxy runtime
- 3. A *Key-Value Map* named `{{ SHORT_SERVICE_NAME }}-variables-encrypted`, containing any secrets you might need at proxy runtime
-
-The Key-Value maps need to be specifed within the [api-management-infrasture](https://github.com/NHSDigital/api-management-infrastructure) repository to be able to be used with the API proxy.
+As currently defined in your `proxies` folder, your proxies do pretty much nothing.
+Telling Apigee how to connect to your backend requires a *Target Server*, which you should call named `{{ SERVICE_NAME }}-target`.
+Our *Target Servers* defined in the [api-management-infrasture](https://github.com/NHSDigital/api-management-infrastructure) repository.
 
 :bulb: For Sandbox-running environments (`test`) these need to be present for successful deployment but can be set to empty/dummy values.

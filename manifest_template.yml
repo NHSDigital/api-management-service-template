@@ -37,20 +37,31 @@ apigee:
         attributes:
           - name: access
             value: public
-          - name: ratelimit
-            value: 300pm
+          - name: ratelimiting
+            value:
+              {{ NAME }}:
+                quota:
+                  enabled: true
+                  limit: 300
+                  interval: 1
+                  timeunit: minute
+                spikeArrest:
+                  enabled: true
+                  ratelimit: 600pm # 10 requests per second
+              app:
+                quota:
+                  enabled: false
+                spikeArrest:
+                  enabled: false
         description: {{ DESCRIPTION }}
         displayName: {{ TITLE }}
         environments: [ {{ ENV.name }} ]
         proxies:
-          - {{ SERVICE_NAME }}-{{ ENV.name }}
+          - {{ NAME }}
           - identity-service-{{ ENV.name }}
         scopes:
           - 'urn:nhsd:apim:app:level3:{{ SERVICE_NAME }}'
           - 'urn:nhsd:apim:user-nhs-id:aal3:{{ SERVICE_NAME }}'
-        quota: '300'
-        quotaInterval: '1'
-        quotaTimeUnit: minute
     specs:
       - name: {{ NAME }}
         path: {{ SERVICE_NAME }}.json

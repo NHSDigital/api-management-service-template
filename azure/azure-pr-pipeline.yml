@@ -12,7 +12,7 @@ resources:
       endpoint: NHSDigital
   pipelines:
   - pipeline: build_pipeline
-    source: "{{ config['x-meta'].pipeline_name_prefix }}-Build"
+    source: "{{ PIPELINE_NAME_PREFIX }}-Build"
     trigger:
       branches:
         exclude:
@@ -29,12 +29,11 @@ variables:
 extends:
   template: azure/common/apigee-deployment.yml@common
   parameters:
-    service_name: ${{ '{{' }} variables.service_name {{ '}}' }}
-    short_service_name: ${{ '{{' }} variables.short_service_name {{ '}}' }}
-    service_base_path: ${{ '{{' }} variables.service_base_path {{ '}}' }}
+    service_name: {% raw %}${{ variables.service_name }} {% endraw %}
+    short_service_name: {% raw %}${{ variables.short_service_name }} {% endraw %}
+    service_base_path: {% raw %}${{ variables.service_base_path }} {% endraw %}
     apigee_deployments:
       - environment: internal-dev
-        make_spec_visible: true
         post_deploy:
           - template: ./templates/run-smoke-tests.yml
       - environment: internal-dev-sandbox

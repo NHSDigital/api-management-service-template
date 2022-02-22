@@ -9,7 +9,7 @@ const uuid = require('uuid');
 
 function setup(options) {
     options = options || {};
-    app.locals.app_name = options.APP_NAME || '{{ config['x-meta'].service_name }}';
+    app.locals.app_name = options.APP_NAME || '{{ SERVICE_NAME }}';
     app.locals.version_info = JSON.parse(options.VERSION_INFO || '{}');
     log.setLevel(options.LOG_LEVEL || "info");
 

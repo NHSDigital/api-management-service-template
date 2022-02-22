@@ -1,4 +1,15 @@
 <TargetEndpoint name="{{ config['x-meta'].service_name }}-target">
+  <PreFlow>
+    <Request>
+      <Step>
+        <Name>OauthV2.VerifyAccessToken</Name>
+      </Step>
+      <!-- APMSPII-1139 rate litmiting to be handle by shared flow, must be after authorization policy -->
+      <Step>
+        <Name>FlowCallout.ApplyRateLimiting</Name>
+      </Step>
+    </Request>
+  </PreFlow>
   <FaultRules>
     <FaultRule name="access_token_expired">
       <Step>
@@ -10,16 +21,6 @@
       <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
     </FaultRule>
   </FaultRules>
-  <PreFlow>
-    <Request>
-      <Step>
-        <Name>OauthV2.VerifyAccessToken</Name>
-      </Step>
-      <Step>
-        <Name>FlowCallout.ApplyRateLimiting</Name>
-      </Step>
-    </Request>
-  </PreFlow>
   <!--
     To point to a named target server as this is how it SHOULD be implemented:
     For example:

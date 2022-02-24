@@ -37,6 +37,8 @@ apigee:
         attributes:
           - name: access
             value: public
+            # For a parameterised example of rate limiting per environment,
+            # see https://github.com/NHSDigital/personal-demographics-service-api/blob/master/manifest_template.yml
           - name: ratelimiting
             value:
               {{ NAME }}:

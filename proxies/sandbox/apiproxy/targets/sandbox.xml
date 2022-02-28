@@ -15,6 +15,6 @@
         </Response>
     </PreFlow>
     <HTTPTargetConnection>
-      {{ HOSTED_TARGET_CONNECTION }}
+      {% raw %}{{ HOSTED_TARGET_CONNECTION }}{% endraw %}
     </HTTPTargetConnection>
 </TargetEndpoint>

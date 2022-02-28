@@ -1,8 +1,8 @@
-# {{ config['x-meta'].service_name }}
+# {{ SERVICE_NAME }}
 
-![Build](https://github.com/NHSDigital/{{ config['x-meta'].service_name }}/workflows/Build/badge.svg?branch=master)
+![Build](https://github.com/NHSDigital/{{ SERVICE_NAME }}/workflows/Build/badge.svg?branch=master)
 
-This is a specification for the *{{ config['x-meta'].service_name }}* API.
+This is a specification for the *{{ SERVICE_NAME }}* API.
 
 * `specification/` This [Open API Specification](https://swagger.io/docs/specification/about/) describes the endpoints, methods and messages exchanged by the API. Use it to generate interactive documentation; the contract between the API and its consumers.
 * `sandbox/` This NodeJS application implements a mock implementation of the service. Use it as a back-end service to the interactive documentation to illustrate interactions and concepts. It is not intended to provide an exhaustive/faithful environment suitable for full development and testing.
@@ -12,7 +12,7 @@ This is a specification for the *{{ config['x-meta'].service_name }}* API.
 Consumers of the API will find developer documentation on the [NHS Digital Developer Hub](https://digital.nhs.uk/developer).
 
 ## Contributing
-Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](https://github.com/NHSDigital/{{ config['x-meta'].service_name }}/blob/master/CONTRIBUTING.md) and the [community code of conduct](https://github.com/NHSDigital/{{ config['x-meta'].service_name }}/blob/master/CODE_OF_CONDUCT.md).
+Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](https://github.com/NHSDigital/{{ SERVICE_NAME }}/blob/master/CONTRIBUTING.md) and the [community code of conduct](https://github.com/NHSDigital/{{ SERVICE_NAME }}/blob/master/CODE_OF_CONDUCT.md).
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.
@@ -88,12 +88,8 @@ The Apigee portal will not automatically pull examples from schemas, you must sp
 
 ### Platform setup
 
-Successful deployment of the API Proxy requires:
-
- 1. A *Target Server* named `{{ config['x-meta'].service_name }}-target`
- 2. A *Key-Value Map* named `{{ config['x-meta'].short_service_name }}-variables`, containing any values you might need at proxy runtime
- 3. A *Key-Value Map* named `{{ config['x-meta'].short_service_name }}-variables-encrypted`, containing any secrets you might need at proxy runtime
-
-The Key-Value maps need to be specifed within the [api-management-infrasture](https://github.com/NHSDigital/api-management-infrastructure) repository to be able to be used with the API proxy.
+As currently defined in your `proxies` folder, your proxies do pretty much nothing.
+Telling Apigee how to connect to your backend requires a *Target Server*, which you should call named `{{ SERVICE_NAME }}-target`.
+Our *Target Servers* defined in the [api-management-infrasture](https://github.com/NHSDigital/api-management-infrastructure) repository.
 
 :bulb: For Sandbox-running environments (`test`) these need to be present for successful deployment but can be set to empty/dummy values.

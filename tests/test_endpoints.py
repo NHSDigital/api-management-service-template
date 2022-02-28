@@ -39,8 +39,8 @@ class TestEndpoints:
         await app.create_new_app()
 
         await product.update_scopes([
-            "urn:nhsd:apim:app:level3:{{ config['x-meta'].service_name }}",
-            "urn:nhsd:apim:user-nhs-id:aal3:{{ config['x-meta'].service_name }}"
+            "urn:nhsd:apim:app:level3:{{ SERVICE_NAME }}",
+            "urn:nhsd:apim:user-nhs-id:aal3:{{ SERVICE_NAME }}"
         ])
         await app.add_api_product([product.name])
 

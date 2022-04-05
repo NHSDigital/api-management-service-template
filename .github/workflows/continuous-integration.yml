@@ -1,4 +1,4 @@
-name: Create Release
+{% raw %}name: Create Release
 on: push
 
 jobs:
@@ -41,3 +41,4 @@ jobs:
         with:
           tag_name: ${{ env.SPEC_VERSION }}
           release_name: ${{ env.SPEC_VERSION }}
+{% endraw %}

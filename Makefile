@@ -1,10 +1,10 @@
 SHELL=/bin/bash -euo pipefail
 
-#Installs dependencies useing poetry.
+#Installs dependencies using poetry.
 install-python:
 	poetry install
 
-#Installs dependencies uses npm.
+#Installs dependencies using npm.
 install-node:
 	npm install
 	cd sandbox && npm install

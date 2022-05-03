@@ -1,10 +1,10 @@
 SHELL=/bin/bash -euo pipefail
 
-#Installs Poetry, a Python library manager.
+#Installs dependencies useing poetry.
 install-python:
 	poetry install
 
-#Installs npm, a JavaScript Package Manager, in root dir and /sandbox/.
+#Installs dependencies uses npm.
 install-node:
 	npm install
 	cd sandbox && npm install
@@ -21,10 +21,19 @@ lint:
 	npm run lint
 	find . -name '*.py' -not -path '**/.venv/*' | xargs poetry run flake8
 
-#Create /build/ sub-directory and builds the project into it.
+#Removes build/ + dist/ directories
+clean:
+	rm -rf build
+	rm -rf dist
+
+#Creates the fully expanded OAS spec in json
 publish: clean
 	mkdir -p build
 	npm run publish 2> /dev/null
+
+#Runs build proxy script
+build-proxy:
+	scripts/build_proxy.sh
 
 #Files to loop over in release
 _dist_include="pytest.ini poetry.lock poetry.toml pyproject.toml Makefile build/. tests"
@@ -37,6 +46,6 @@ release: clean publish build-proxy
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-qa-sandbox.yml
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-dev-sandbox.yml
 
-#Runs end-to-end smoke tests post-deployment to verify the environment is working
+#Command to run end-to-end smoktests post-deployment to verify the environment is working
 smoketest:
 	poetry run pytest -v --junitxml=smoketest-report.xml -s -m smoketest

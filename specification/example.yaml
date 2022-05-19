@@ -7,6 +7,15 @@ info:
   description: |
     ## Overview
     Add a fully fledged description here with markdown syntax.
+    ## Who can use this API
+    ## Related APIs
+    ## API status and roadmap
+    ## Service level
+    ## Technology
+    ## Network access
+    ## Security and authorisation
+    ## Environments and testing
+    ## Onboarding
   contact:
     name: '{{ SERVICE_NAME }} API Support'
     url: 'https://digital.nhs.uk/developer/help-and-support'

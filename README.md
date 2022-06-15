@@ -97,7 +97,7 @@ Our *Target Servers* defined in the [api-management-infrastructure](https://gith
 ### Detailed folder walk through
 To get started developing your API use this template repo alongside guidance provided by the [API Producer Zone confluence](https://nhsd-confluence.digital.nhs.uk/display/APM/Deliver+your+API)
 
-`/.github`:
+#### `/.github`:
 
 This folder contains templates that can be customised for items such as opening pull requests or issues within the repo
 
@@ -105,7 +105,7 @@ This folder contains templates that can be customised for items such as opening 
 - `pr-lint.yaml`: This workflow template shows how to link Pull Request's to Jira tickets and runs when a pull request is opened.
 - `continuous-integration.yml`: This workflow template shows how to publish a Github release when pushing to master.
 
-`/azure`:
+#### `/azure`:
 
 Contains templates defining Azure Devops pipelines. By default the following pipelines are available:
 -  `azure-build-pipeline.yml`: Assembles the contents of your repository into a single file ("artifact") on Azure Devops and pushes any containers to our Docker registry. By default this pipeline is enabled for all branches.
@@ -116,7 +116,7 @@ The `project.yml` file needs to be populated with your service names to make the
 
 `/azure/templates`: Here you can define reusable actions, such as running tests, and call these actions during Azure Devops pipelines. 
 
-`/proxies`:
+#### `/proxies`:
 
 This folder contains files relating to your Apigee API proxy.
 
@@ -133,26 +133,27 @@ See the APM confluence for more information on how the [_ping](https://nhsd-conf
 
 `/targets`: The XMLs within these folders set up target definitions which allow connections to external target servers. The sandbox target definition is implemented to route to the sandbox target server (code for this sandbox is found under /sandbox of this template repo). For more info on setting up a target server see the [API Producer Zone confluence](https://nhsd-confluence.digital.nhs.uk/display/APM/Setting+up+a+target+server)
 
-`/sandbox`:
+#### `/sandbox`:
 
 This folder contains a template for a sandbox API. This example is a NodeJs application running in Docker. The application handles a few simple endpoints such as: /_ping, /health, /_status, /hello and some logging logic.
 For more information about building sandbox APIs see the [API Producer Zone confluence](https://nhsd-confluence.digital.nhs.uk/display/APM/Setting+up+your+API+sandbox ).
 
-`/scripts`:
+#### `/scripts`:
 
 Contains useful scripts that are used throughout the project, for example in Makefile and Github workflows
 
-`/specification`:
+#### `/specification`:
 
 Create an OpenAPI Specification to document your API. For more information about developing specifications see the [API Producer Zone confluence](https://nhsd-confluence.digital.nhs.uk/display/APM/Documenting+your+API).
 
-`/tests`:
+#### `/tests`:
 
 End to End tests. These tests are written in Python and use the PyTest test runner. Before running these tests you will need to set environment variables. The `test_endpoint.py` file provides a template of how to set up tests which test your api endpoints. For more information about testing your API see the [API Producer Zone confluence](https://nhsd-confluence.digital.nhs.uk/display/APM/Testing+your+API ).
 
-`Makefile`: Useful make targets to get started including: installing dependencies and running smoke tests.
+#### `Makefile`:
+Useful make targets to get started including: installing dependencies and running smoke tests.
 
-`ecs-proxies-containers.yml ` and `ecs-proxies-deploy.yml`:
+#### `ecs-proxies-containers.yml ` and `ecs-proxies-deploy.yml`:
 
 These files are required to deploy containers alongside your Apigee proxy during the Azure Devops `azure-build-pipeline`. In this template repo we are deploying our sandbox container which is used as the target server for the sandbox proxy.
 
@@ -162,11 +163,11 @@ These files are required to deploy containers alongside your Apigee proxy during
 
 For more information about deploying ECS containers see the [API Producer Zone confluence](https://nhsd-confluence.digital.nhs.uk/display/APM/Developing+ECS+proxies#DevelopingECSproxies-Buildingandpushingdockercontainers ).
 
-`manifest_template.yml`:
+#### `manifest_template.yml`:
 
 This file defines 2 dictionaries of fields that are required for the Apigee deployment. For more info see the [API Producer Zone confluence](https://nhsd-confluence.digital.nhs.uk/display/APM/Manifest.yml+reference ).
 
-Package management:
+#### Package management:
 
 This template uses poetry for python dependency management, and uses these files: poetry.lock, poetry.toml, pyproject.toml.
 

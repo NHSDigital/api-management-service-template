@@ -32,7 +32,3 @@ Longer description of changes if explaining rationale is necessary,
 limited to 80 columns and spanning as many lines as you need.
 ```
 
-### Changelog
-Every pull request must include a change to the changelog.
-
-Add changes to the top of the current date. If the date is old, the reviewer should update the changelog to be correct before merging.

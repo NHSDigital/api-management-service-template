@@ -4,7 +4,7 @@
   "description": "OAS (Swagger v3) API Definition for Template API",
   "scripts": {
     "lint": "node_modules/.bin/openapi-generator-cli validate -i openapi-tags -s operation-tags specification/{{ SERVICE_NAME }}.yaml --skip default-and-example-are-redundant",
-    "publish": "./node_modules/.bin/openapi-generator-cli generate -i specification/fhir-converter.yaml --generator-key v3.0  -g openapi -o build && mv build/openapi.json build/{{ SERVICE_NAME }}.json",
+    "publish": "./node_modules/.bin/openapi-generator-cli generate --skip-operation-example -i specification/{{ SERVICE_NAME }}.yaml --generator-key v3.0  -g openapi -o build && rm openapitools.json && mv build/openapi.json build/{{ SERVICE_NAME }}.json",
     "check-licenses": "node_modules/.bin/license-checker --failOn GPL --failOn LGPL"
   },
   "author": "NHS Digital",

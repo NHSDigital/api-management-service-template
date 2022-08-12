@@ -18,3 +18,4 @@ __pycache__/
 smoketest-report.xml
 env
 .dir-locals.el
+*.pyc

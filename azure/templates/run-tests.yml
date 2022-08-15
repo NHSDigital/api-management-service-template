@@ -16,7 +16,7 @@ steps:
         PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
         make test
       workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
-      displayName: run full test suite
+      displayName: Run full test suite
     - task: PublishTestResults@2
       displayName: 'Publish test results'
       condition: always()
@@ -29,7 +29,7 @@ steps:
         PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
         make smoketest
       workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
-      displayName: run smoketests
+      displayName: Run smoketests
     - task: PublishTestResults@2
       displayName: 'Publish smoketest results'
       condition: always()

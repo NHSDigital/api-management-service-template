@@ -53,7 +53,7 @@ release: clean publish build-proxy
 TEST_CMD := @APIGEE_ACCESS_TOKEN=$(APIGEE_ACCESS_TOKEN) \
 		poetry run pytest -v \
 		--color=yes \
-		--api-name= {{ SERVICE_NAME }} \
+		--api-name={{ SERVICE_NAME }} \
 		--proxy-name=$(PROXY_NAME) \
 		-s
 

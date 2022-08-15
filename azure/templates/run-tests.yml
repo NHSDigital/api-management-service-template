@@ -10,7 +10,7 @@ steps:
     displayName: Setup pytests
     condition: always()
 
-  - ${{ if eq(parameters.full, true) }}:
+  {% raw %}- ${{ if parameters.full }}:{% endraw %}
     - bash: |
         APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
         PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
@@ -23,7 +23,7 @@ steps:
       inputs:
         testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/test-report.xml'
         failTaskOnFailedTests: true
-  - ${{ if eq(parameters.full, false) }}:
+  {% raw %}- ${{ if not(parameters.full) }}:{% endraw %}
     - bash: |
         APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
         PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \

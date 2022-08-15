@@ -8,7 +8,9 @@ steps:
       make install-python
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
     displayName: Setup pytests
-{% if parameters.full %}
+    condition: always()
+
+  - ${{ if eq(parameters.full, true) }}:
     - bash: |
         APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
         PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
@@ -21,9 +23,7 @@ steps:
       inputs:
         testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/test-report.xml'
         failTaskOnFailedTests: true
-{% endif %}
-
-{% if not(parameters.full) %}
+  - ${{ if eq(parameters.full, false) }}:
     - bash: |
         APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
         PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
@@ -36,4 +36,3 @@ steps:
       inputs:
         testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/smoketest-report.xml'
         failTaskOnFailedTests: true
-{% endif %}

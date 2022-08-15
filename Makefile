@@ -58,7 +58,7 @@ TEST_CMD := @APIGEE_ACCESS_TOKEN=$(APIGEE_ACCESS_TOKEN) \
 		-s
 
 #Command to run end-to-end smoktests post-deployment to verify the environment is working
-smoke-test:
+smoketest:
 	$(TEST_CMD) \
 	--junitxml=smoketest-report.xml \
 	-m smoketest

@@ -46,6 +46,23 @@ release: clean publish build-proxy
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-qa-sandbox.yml
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-dev-sandbox.yml
 
+#################
+# Test commands #
+#################
+
+TEST_CMD := @APIGEE_ACCESS_TOKEN=$(APIGEE_ACCESS_TOKEN) \
+		poetry run pytest -v \
+		--color=yes \
+		--api-name={{ SERVICE_NAME }} \
+		--proxy-name=$(PROXY_NAME) \
+		-s
+
 #Command to run end-to-end smoktests post-deployment to verify the environment is working
 smoketest:
-	poetry run pytest -v --junitxml=smoketest-report.xml -s -m smoketest
+	$(TEST_CMD) \
+	--junitxml=smoketest-report.xml \
+	-m smoketest
+
+test:
+	$(TEST_CMD) \
+	--junitxml=test-report.xml \

@@ -7,6 +7,7 @@ import requests
 import pytest
 from os import getenv
 
+
 @pytest.mark.smoketest
 def test_ping(nhsd_apim_proxy_url):
     resp = requests.get(f"{nhsd_apim_proxy_url}/_ping")
@@ -32,6 +33,7 @@ def test_wait_for_ping(nhsd_apim_proxy_url):
         pytest.fail("Timeout Error - max retries")
 
     assert deployed_commitId == getenv('SOURCE_COMMIT_ID')
+
 
 @pytest.mark.smoketest
 def test_status(nhsd_apim_proxy_url, status_endpoint_auth_headers):

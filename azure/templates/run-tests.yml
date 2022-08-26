@@ -14,6 +14,7 @@ steps:
     - bash: |
         APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
         PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
+        SOURCE_COMMIT_ID=$(Build.SourceVersion) \
         make test
       workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
       displayName: Run full test suite
@@ -27,6 +28,7 @@ steps:
     - bash: |
         APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
         PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
+        SOURCE_COMMIT_ID=$(Build.SourceVersion) \
         make smoketest
       workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
       displayName: Run smoketests

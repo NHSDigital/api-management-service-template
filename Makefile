@@ -9,7 +9,7 @@ install-node:
 	npm install --legacy-peer-deps
 	cd sandbox && npm install --legacy-peer-deps
 
-#Configures Git Hooks, which are scipts that run given a specified event.
+#Configures Git Hooks, which are scripts that run given a specified event.
 .git/hooks/pre-commit:
 	cp scripts/pre-commit .git/hooks/pre-commit
 
@@ -57,7 +57,12 @@ TEST_CMD := @APIGEE_ACCESS_TOKEN=$(APIGEE_ACCESS_TOKEN) \
 		--proxy-name=$(PROXY_NAME) \
 		-s
 
-#Command to run end-to-end smoktests post-deployment to verify the environment is working
+PROD_TEST_CMD := $(TEST_CMD) \
+		--apigee-app-id=$(APIGEE_APP_ID) \
+		--status-endpoint-api-key=$(STATUS_ENDPOINT_API_KEY)
+		-s
+
+#Command to run end-to-end smoketests post-deployment to verify the environment is working
 smoketest:
 	$(TEST_CMD) \
 	--junitxml=smoketest-report.xml \
@@ -65,4 +70,13 @@ smoketest:
 
 test:
 	$(TEST_CMD) \
+	--junitxml=test-report.xml \
+
+smoketest-prod:
+	$(PROD_TEST_CMD) \
+	--junitxml=smoketest-report.xml \
+	-m smoketest
+
+test-prod:
+	$(PROD_CMD) \
 	--junitxml=test-report.xml \

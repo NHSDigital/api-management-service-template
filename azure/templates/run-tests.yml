@@ -2,6 +2,27 @@ parameters:
   - name: full
     type: boolean
     default: false
+  - name: prod
+    type: boolean
+    default: false
+variables:
+  - group: status-endpoint
+  - name: test_variables:
+  - value:
+    {% raw %}${{ if parameters.prod }}:{% endraw %}
+      # In order to run tests in prod you must supply the unique ID of an Apigee app
+      # that has authorized access to your service proxy.
+      - test_variables: |
+          PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
+          SOURCE_COMMIT_ID=$(Build.SourceVersion) \
+          APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
+          APIGEE_APP_ID= \
+          STATUS_ENDPOINT_API_KEY=$(STATUS_ENDPOINT_API_KEY) \
+    {% raw %}- ${{ if not(parameters.prod) }}:{% endraw %}
+      - test_variables: |
+          PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
+          SOURCE_COMMIT_ID=$(Build.SourceVersion) \
+          APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
 
 steps:
   - bash: |
@@ -12,9 +33,7 @@ steps:
 
   {% raw %}- ${{ if parameters.full }}:{% endraw %}
     - bash: |
-        APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
-        PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
-        SOURCE_COMMIT_ID=$(Build.SourceVersion) \
+        $(test_variables)
         make test
       workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
       displayName: Run full test suite
@@ -26,9 +45,7 @@ steps:
         failTaskOnFailedTests: true
   {% raw %}- ${{ if not(parameters.full) }}:{% endraw %}
     - bash: |
-        APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
-        PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
-        SOURCE_COMMIT_ID=$(Build.SourceVersion) \
+        $(test_variables)
         make smoketest
       workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
       displayName: Run smoketests

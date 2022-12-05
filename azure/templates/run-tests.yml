@@ -18,11 +18,15 @@ variables:
           APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
           APIGEE_APP_ID= \
           STATUS_ENDPOINT_API_KEY=$(STATUS_ENDPOINT_API_KEY) \
+      - test-command: make test-prod
+      - smoketest-command: make smoketest-prod
     {% raw %}- ${{ if not(parameters.apigee-prod-org-tests) }}:{% endraw %}
       - test-variables: |
           PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
           SOURCE_COMMIT_ID=$(Build.SourceVersion) \
           APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
+      - test-command: make test
+      - smoketest-command: make smoketest
 
 steps:
   - bash: |
@@ -33,8 +37,8 @@ steps:
 
   {% raw %}- ${{ if parameters.full }}:{% endraw %}
     - bash: |
-        $(test_variables)
-        make test
+        $(test-variables)
+        $(test-command)
       workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
       displayName: Run full test suite
     - task: PublishTestResults@2
@@ -46,7 +50,7 @@ steps:
   {% raw %}- ${{ if not(parameters.full) }}:{% endraw %}
     - bash: |
         $(test-variables)
-        make smoketest
+        $(smoketest-command)
       workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
       displayName: Run smoketests
     - task: PublishTestResults@2

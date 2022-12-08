@@ -1,4 +1,15 @@
 variables:
-  service_name: {{ SERVICE_NAME }}
-  short_service_name: {{ SHORT_SERVICE_NAME }}
-  service_base_path: {{ SERVICE_BASE_PATH }}
+  - group: status-endpoint
+  - name: service_name
+    value: {{ SERVICE_NAME }}
+  - name: short_service_name
+    value: {{ SHORT_SERVICE_NAME }}
+  - name: service_base_path
+    value: {{ SERVICE_BASE_PATH }}
+  - name: test-variables
+  - value: |
+      PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
+      SOURCE_COMMIT_ID=$(Build.SourceVersion) \
+      APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
+      APIGEE_APP_ID= \
+      STATUS_ENDPOINT_API_KEY=$(STATUS_ENDPOINT_API_KEY) \

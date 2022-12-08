@@ -2,35 +2,12 @@ parameters:
   - name: full
     type: boolean
     default: false
-  - name: apigee-prod-org-tests
-    type: boolean
-    default: false
-variables:
-  - group: status-endpoint
-    {% raw %}${{ if parameters.apigee-prod-org-tests }}:{% endraw %}
-      # In order to run tests in prod you must supply the unique ID of an Apigee app
-      # that has authorized access to your service proxy.
-      - name: test-variables:
-      - value: |
-          PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
-          SOURCE_COMMIT_ID=$(Build.SourceVersion) \
-          APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
-          APIGEE_APP_ID= \
-          STATUS_ENDPOINT_API_KEY=$(STATUS_ENDPOINT_API_KEY) \
-      - name: test-command
-      - value: make test-prod
-      - name: smoketest-command
-      - value: make smoketest-prod
-    {% raw %}- ${{ if not(parameters.apigee-prod-org-tests) }}:{% endraw %}
-      - name: test-variables:
-      - value: |
-          PROXY_NAME=$(FULLY_QUALIFIED_SERVICE_NAME) \
-          SOURCE_COMMIT_ID=$(Build.SourceVersion) \
-          APIGEE_ACCESS_TOKEN=$(secret.AccessToken) \
-      - name: test-command
-      - value: make test
-      - name: smoketest-command
-      - value: make smoketest
+  - name: test-command
+    type: string
+    default: make test
+  - name: smoketest-command
+    type: string
+    default: make smoketest
 
 steps:
   - bash: |

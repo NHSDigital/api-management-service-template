@@ -7,7 +7,7 @@ APIGEE_ENVIRONMENTS:
     has_mock_auth: true
   - name: internal-qa
     display_name: Internal QA
-    has_mock_auth: true 
+    has_mock_auth: true
   - name: ref
     display_name: Reference
     has_mock_auth: true
@@ -80,12 +80,4 @@ apigee:
     specs:
       - name: {{ NAME }}
         path: {{ SERVICE_NAME }}.json
-    api_catalog:
-      - edgeAPIProductName: {{ NAME }}
-        anonAllowed: true
-        description: {{ DESCRIPTION }}
-        requireCallbackUrl: false
-        title: {{ TITLE }}
-        visibility: {{ ENV.portal_visibility | default(true) }}
-        specId: {{ NAME }}
 {% endfor %}{% endraw %}

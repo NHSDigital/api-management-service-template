@@ -46,7 +46,7 @@ apigee:
         approvalType: auto
         attributes:
           - name: access
-            value: {{ ENV.product_visibility | default(public) }}
+            value: {{ ENV.product_visibility | default('public') }}
             # For a parameterised example of rate limiting per environment,
             # see https://github.com/NHSDigital/personal-demographics-service-api/blob/master/manifest_template.yml
           - name: ratelimiting

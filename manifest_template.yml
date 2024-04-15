@@ -14,17 +14,17 @@ APIGEE_ENVIRONMENTS:
 # Enable environments when ready by uncommenting:
   # - name: internal-dev-sandbox
   #   display_name: Internal Development Sandbox
-  #   portal_visibility: false
+  #   product_visibility: private
   # - name: internal-qa
   #   display_name: Internal QA
   #   has_mock_auth: true
-  #   portal_visibility: false
+  #   product_visibility: private
   # - name: internal-qa-sandbox
   #   display_name: Internal QA Sandbox
-  #   portal_visibility: false
+  #   product_visibility: private
   # - name: sandbox
   #   display_name: Sandbox
-  #   portal_visibility: false
+  #   product_visibility: private
   # - name: int
   #   display_name: Integration Testing
 ---
@@ -46,7 +46,7 @@ apigee:
         approvalType: auto
         attributes:
           - name: access
-            value: public
+            value: {{ ENV.product_visibility | default('public') }}
             # For a parameterised example of rate limiting per environment,
             # see https://github.com/NHSDigital/personal-demographics-service-api/blob/master/manifest_template.yml
           - name: ratelimiting

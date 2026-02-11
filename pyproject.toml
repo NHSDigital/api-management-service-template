@@ -13,7 +13,7 @@ keywords = ["healthcare", "uk", "nhs"] #TODO add additional keywords
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.13"
 pytest-nhsd-apim = "^5.0.0"
 
 [tool.poetry.group.dev.dependencies]
@@ -30,5 +30,6 @@ pytest = "^8.2.0"
 coverage = "^5.5"
 aiohttp = "^3.13.3"
 pytest-asyncio = "^0.14.0"
+cryptography="46.0.5"
 
 [tool.poetry.scripts]

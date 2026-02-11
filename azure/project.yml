@@ -6,3 +6,5 @@ variables:
     value: {{ SHORT_SERVICE_NAME }}
   - name: service_base_path
     value: {{ SERVICE_BASE_PATH }}
+  - name: python_version
+    value: 3.9

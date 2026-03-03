@@ -7,7 +7,7 @@ updates:
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     target-branch: "master"
     labels: ["dependencies", "python", "poetry"]
     open-pull-requests-limit: 10
@@ -21,7 +21,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     target-branch: "master"
     labels: ["dependencies", "npm"]
     open-pull-requests-limit: 10
@@ -35,7 +35,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/sandbox"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     target-branch: "master"
     labels: ["dependencies", "npm", "sandbox"]
     open-pull-requests-limit: 10
@@ -49,6 +49,6 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     target-branch: "master"
     labels: ["dependencies", "github-actions"]
